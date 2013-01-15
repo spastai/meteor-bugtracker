@@ -142,12 +142,7 @@ function inArray(obj, array) {
  * Helpers 
  */
 Handlebars.registerHelper('formParams',function(formName, obj){
-	return {name:formName,object: Session.get(obj)};
-});
-
-// Deprecated
-Handlebars.registerHelper('generateForm',function(formName, obj){
-	return generateForm(formName, Session.get(obj));
+	return {name:formName,object: Session.get(obj) || {} };
 });
 
 

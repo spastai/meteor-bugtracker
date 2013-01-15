@@ -13,7 +13,6 @@
   <!-- Placed at the end of the document so the pages load faster -->
 </body>
 
-
 <template name="main">
 	{{{page_name_content}}}
 </template>
@@ -27,6 +26,8 @@
 </template>
 
 <template name="new_project">
-
-
+	<h2>New Project:</h2>
+	{{#with formParams "projectForm" "projectObj"}}
+		{{> form}}
+	{{/with}}
 </template>

@@ -16,6 +16,7 @@ Session.set('ticket_id', null);
 
 Template.main.page_name_content = function () {
 	var action = Session.get("page_name");
+	console.log("Page name:"+action);
 	if(action && Template[action]) {
 		return Template[action]();
 	} else {
