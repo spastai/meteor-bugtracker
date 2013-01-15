@@ -1,4 +1,10 @@
-Template.ticket_list.title = function () {
+Template.ticket_list_page.events({
+	'click .new-issue': function (event, template) {
+        Session.set('page_name', 'NewIssue');
+	}
+});
+
+Template.TicketList.title = function () {
     var project_id = Session.get('project_id'), owner_id = Session.get('owner_id');
     var title;
     if (project_id) {
@@ -16,11 +22,11 @@ Template.ticket_list.title = function () {
     return title;
 };
 
-Template.ticket_list.viewing_all_projects = function () {
+Template.TicketList.viewing_all_projects = function () {
     return Session.equals('project_id', null);
 };
 
-Template.ticket_list.tickets = function () {
+Template.TicketList.tickets = function () {
     var query = {};
     var add_filter = function (field) {
         var value = Session.get(field);
@@ -33,7 +39,7 @@ Template.ticket_list.tickets = function () {
     return Tickets.find(query);
 };
 
-Template.ticket_in_list.viewing_all_projects = Template.ticket_list.viewing_all_projects;
+Template.ticket_in_list.viewing_all_projects = Template.TicketList.viewing_all_projects;
 
 Template.ticket_in_list.project = name_getter(Projects, 'project_id');
 Template.ticket_in_list.owner = name_getter(People, 'owner_id');

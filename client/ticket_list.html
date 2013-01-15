@@ -1,8 +1,12 @@
 <template name="ticket_list_page">
 <div class="span9">
-  <div class="well">
-    {{> ticket_list }}
-  </div>
+	<div>
+		<form class="form-inline">
+   			<button class="btn new-issue">New Issue</button>
+   		</form>
+	</div>
+	
+    {{> TicketList }}
 </div>
 <div class="span3">
   <div class="well">
@@ -12,10 +16,9 @@
 </template>
 
 
-<template name="ticket_list">
-<h1>{{ title }}</h1>
+<template name="TicketList">
 
-<table class="table table-striped table-bordered table-condensed">
+<table class="table table-striped table-bordered table-condensed table-hover">
   <thead>
     <tr>
       {{# if viewing_all_projects }}
@@ -36,6 +39,14 @@
 </template>
 
 
+<template name="NewIssue">
+	<h2>New Issue:</h2>
+	{{#with formParams "issueForm" "issueObj"}}
+		{{> form}}
+	{{/with}}
+</template>
+
+
 <template name="ticket_in_list">
 
 {{# if viewing_all_projects }}
@@ -47,3 +58,4 @@
 <td>{{ owner }}</td>
 
 </template>
+

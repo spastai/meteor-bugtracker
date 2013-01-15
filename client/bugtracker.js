@@ -16,7 +16,7 @@ Session.set('ticket_id', null);
 
 Template.main.page_name_content = function () {
 	var action = Session.get("page_name");
-	console.log("Page name:"+action);
+	// console.log("Page name:"+action);
 	if(action && Template[action]) {
 		return Template[action]();
 	} else {
@@ -24,10 +24,24 @@ Template.main.page_name_content = function () {
 		return Template['list_page']();
 	} 
 };
-
 Template.main.viewing_ticket = function () {
     return ! Session.equals('ticket_id', null);
 };
+
+
+// New project 
+Template.new_project.events({
+	'click .save': function (event, template) {
+		var values = forms.getValues("projectForm",template);
+		logdir("Values:",values);
+		// TODO move to server
+		values.owner = Meteor.userId();
+		Projects.insert(values);
+		
+        Session.set('page_name', 'list_page');
+		
+	}
+});	
 
 
 // Utils 

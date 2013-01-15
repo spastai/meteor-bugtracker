@@ -11,28 +11,34 @@ Template.form.content = function() {
  */ 
 Template.form.rendered = function() {
 	var form = forms.getForm(this.data.name);
+
+	// add validation
 	var rules = {};
 	for (var propName in form) {
-		rules[propName] = form[propName].validation;
+		if(form[propName].validation) {
+			rules[propName] = form[propName].validation;
+		}
+	}
+	if(rules.length > 0) {
+		$("#"+this.data.name).validate({
+			highlight: function(element, errorClass) {
+		        $(element.parentNode.parentNode).addClass("error");
+		    },
+		    unhighlight: function(element, errorClass) {
+		        $(element.parentNode.parentNode).removeClass("error");
+		    },
+		    rules: rules
+		});
 	}
 	
-	$("#"+this.data.name).validate({
-		highlight: function(element, errorClass) {
-	        $(element.parentNode.parentNode).addClass("error");
-	    },
-	    unhighlight: function(element, errorClass) {
-	        $(element.parentNode.parentNode).removeClass("error");
-	    },
-	    rules: rules
-	});
-	
+	/*
 	$('.datepicker').datepicker({
 		format: 'yyyy-mm-dd'
 	});		
 	$('.htmledit').each(function(index) {
 		CKEDITOR.replace($(this).attr('id'));
 	});
-	
+	*/
 };
 
 /*******************************
@@ -142,7 +148,8 @@ function inArray(obj, array) {
  * Helpers 
  */
 Handlebars.registerHelper('formParams',function(formName, obj){
-	return {name:formName,object: Session.get(obj) || {} };
+    var obj = Session.get(obj) || {};
+	return {name:formName,object: obj};
 });
 
 
