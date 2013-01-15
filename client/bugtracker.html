@@ -1,6 +1,4 @@
 <head>
-  	<link href="/css/bootstrap.css" rel="stylesheet">
-  	<link href="/css/bootstrap-responsive.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<title>BugTracker</title>
 </head>
@@ -17,16 +15,18 @@
 
 
 <template name="main">
+	{{{page_name_content}}}
+</template>
 
-{{# if page_name_is "list_page" }}
-{{# if viewing_ticket }}
-{{> ticket_detail_page }}
-{{ else }}
-{{> ticket_list_page }}
-{{/if }}
-{{/if }}
+<template name="list_page">
+	{{# if viewing_ticket }}
+		{{> ticket_detail_page }}
+	{{ else }}
+		{{> ticket_list_page }}
+	{{/if }}
+</template>
+
+<template name="new_project">
 
 
 </template>
-
-

@@ -1,6 +1,6 @@
 Template.navbar.nav_links = [
     {page_name: 'list_page', title: 'List'},
-    {page_name: 'new_page', title: 'New'},
+    {page_name: 'new_project', title: 'New'},
     {page_name: 'projects_page', title: 'Projects'},
     {page_name: 'account_page', title: 'Account'}
     ];

@@ -7,10 +7,6 @@ Tickets = new Meteor.Collection('Tickets');
 // {login, name}
 People = new Meteor.Collection('People');
 
-
-// Page switcher via navbar
-Session.set('page_name', 'list_page');
-
 // Chosen filters in sidebar
 Session.set('project_id', null);
 Session.set('owner_id', null);
@@ -18,12 +14,18 @@ Session.set('owner_id', null);
 // Currently viewed ticket
 Session.set('ticket_id', null);
 
-Template.main.viewing_ticket = function () {
-    return ! Session.equals('ticket_id', null);
+Template.main.page_name_content = function () {
+	var action = Session.get("page_name");
+	if(action && Template[action]) {
+		return Template[action]();
+	} else {
+		// sets default page
+		return Template['list_page']();
+	} 
 };
 
-Template.main.page_name_is = function (page_name) {
-    return Session.equals('page_name', page_name);
+Template.main.viewing_ticket = function () {
+    return ! Session.equals('ticket_id', null);
 };
 
 
