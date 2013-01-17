@@ -39,6 +39,7 @@ Template.TicketList.tickets = function () {
     return Tickets.find(query);
 };
 
+
 Template.ticket_in_list.viewing_all_projects = Template.TicketList.viewing_all_projects;
 
 Template.ticket_in_list.project = name_getter(Projects, 'project_id');

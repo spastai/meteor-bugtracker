@@ -1,11 +1,13 @@
 /*******************************
- * Meteor 
+ * Meteor
+ * main.js will be loaded last 
  */
 Template.form.content = function() {
 	return generateForm(this.name, this.object);
 };
 
-/* Validation is imeplemted using
+/* 
+ * Validation is imeplemted using
  * http://docs.jquery.com/Plugins/Validation/rules
  *  
  */ 
@@ -41,32 +43,13 @@ Template.form.rendered = function() {
 	*/
 };
 
-/*******************************
- * Class 
- */
-function Forms() {
-	var models = {};
-	
-	this.model = function(name, model) {
-		models[name] = model;
-	};
-	
-	this.getForm = function(name) {
-		return models[name];
-	};
+Template.form.events({
+	'click .save': function (event, template) {
+		var crud = forms.getCrud(template.data.name);
+		crud.create(template);
+	}
+});
 
-	this.getValues = function(name,template) {
-		var result = {};
-		var form = this.getForm(name);
-		for (var propName in form) {
-			// jquery is required for multi select
-			result[propName] = $(template.find("#"+propName)).val();
-		}
-		return result;
-	};
-};
-
-forms = new Forms();
 
 function generateForm(formName, obj) {
 	var form = forms.getForm(formName);

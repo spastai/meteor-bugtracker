@@ -1,4 +1,5 @@
 Template.navbar.nav_links = [
+    {page_name: 'Today', title: 'Today'},
     {page_name: 'list_page', title: 'Issues'},
     {page_name: 'new_project', title: 'Projects'},
     ];
