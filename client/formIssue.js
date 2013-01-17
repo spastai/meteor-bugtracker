@@ -12,6 +12,8 @@ forms.model("issueForm", issueForm, {
 		values.owner = Meteor.userId();
 		logdir("Issue values:",values);
 		Tickets.insert(values);
+	},
+	remove: function(template) {
 	}
 });
  
