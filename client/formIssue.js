@@ -2,7 +2,7 @@
  * New node file
  */
 var issueForm = {
-		name: {type: String, label: "Issue title", placeholder: "Issue title..."},
+		title: {type: String, label: "Issue title", placeholder: "Issue title..."},
 		project: {type: "select", label: "Issue title", options: projects},
 };
 
@@ -11,7 +11,7 @@ forms.model("issueForm", issueForm, {
 		var values = forms.getValues("issueForm",template);
 		values.owner = Meteor.userId();
 		logdir("Issue values:",values);
-		// Tickets.insert(values);
+		Tickets.insert(values);
 	}
 });
  
