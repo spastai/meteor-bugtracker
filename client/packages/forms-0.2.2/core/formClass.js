@@ -1,5 +1,6 @@
 /*******************************
  * Class 
+ * placed in subdirectory to be loaded first
  */
 function Forms() {
 	var models = {};
@@ -25,6 +26,9 @@ function Forms() {
 		return cruds[name];
 	};
 
+	this.remove = function(name, id) {
+		cruds[name].remove(id);
+	};
 
 	this.getValues = function(name,template) {
 		var result = {};

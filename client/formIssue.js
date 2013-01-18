@@ -13,7 +13,8 @@ forms.model("issueForm", issueForm, {
 		logdir("Issue values:",values);
 		Tickets.insert(values);
 	},
-	remove: function(template) {
+	remove: function(id) {
+		Tickets.remove({_id:id});
 	}
 });
  

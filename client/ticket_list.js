@@ -46,8 +46,8 @@ Template.ticket_in_list.project = name_getter(Projects, 'project_id');
 Template.ticket_in_list.owner = name_getter(People, 'owner_id');
 
 Template.ticket_in_list.events = {
-    'click': function () {
-        Session.set('ticket_id', this._id);
-    }
+    'click .delete': function () {
+    	forms.remove("issueForm",this._id);
+     }
 };
 
