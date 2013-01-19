@@ -11,9 +11,16 @@ var issueForm = {
 forms.model("issueForm", issueForm, {
 	create: function(template) {
 		var values = forms.getValues("issueForm",template);
+		// this indicates it is new object
+		values["_id"] = Session.get("issueObj")._id;
 		values.owner_id = Meteor.userId();
 		logdir("Issue values:",values);
-		Tickets.insert(values);
+		if(values._id) {
+			Tickets.update({_id:values._id}, values);
+		} else {
+			Tickets.insert(values);
+		}
+		
 	},
 	remove: function(id) {
 		Tickets.remove({_id:id});
