@@ -1,5 +1,3 @@
-
-
 Template.TicketList.title = function () {
     var project_id = Session.get('project_id'), owner_id = Session.get('owner_id');
     var title;
@@ -52,6 +50,7 @@ name_getter(People, 'owner_id');
 
 Template.ticket_list_page.events({
 	'click .new-issue': function (event, template) {
+        Session.set('issueObj', {});
         Session.set('page_name', 'NewIssue');
 	}
 });
