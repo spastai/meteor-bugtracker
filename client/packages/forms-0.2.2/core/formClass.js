@@ -26,6 +26,7 @@ function Forms() {
 		return cruds[name];
 	};
 
+	// deprecated: use getCrud(..).remove();
 	this.remove = function(name, id) {
 		cruds[name].remove(id);
 	};

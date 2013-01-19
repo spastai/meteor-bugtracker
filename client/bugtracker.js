@@ -14,14 +14,19 @@ Session.set('owner_id', null);
 // Currently viewed ticket
 Session.set('ticket_id', null);
 
+// Main view renderer
 Template.main.page_name_content = function () {
-	var action = Session.get("page_name");
-	// console.log("Page name:"+action);
-	if(action && Template[action]) {
-		return Template[action]();
+	if(Meteor.user())  {
+		var action = Session.get("page_name");
+		// console.log("Page name:"+action);
+		if(action && Template[action]) {
+			return Template[action]();
+		} else {
+			// sets default page
+			return Template['list_page']();
+		}
 	} else {
-		// sets default page
-		return Template['list_page']();
+		return Template['Login']();
 	} 
 };
 Template.main.viewing_ticket = function () {
@@ -56,6 +61,10 @@ var name_getter = function (collection, field) {
     };
 };
 
-
+// Helpers
+Handlebars.registerHelper('checked',function(input){
+	//console.log("Checked:"+input);
+	return input? "checked":"";
+});
 
 

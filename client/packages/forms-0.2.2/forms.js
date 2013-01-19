@@ -45,8 +45,7 @@ Template.form.rendered = function() {
 
 Template.form.events({
 	'click .save': function (event, template) {
-		var crud = forms.getCrud(template.data.name);
-		crud.create(template);
+		var crud = forms.getCrud(template.data.name).create(template);
 	}
 });
 

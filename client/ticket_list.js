@@ -22,6 +22,12 @@ Template.TicketList.title = function () {
     return title;
 };
 
+Template.NewIssue.events({
+	'click .save': function (event, template) {
+        Session.set('page_name', 'list_page');
+	}
+});
+
 Template.TicketList.viewing_all_projects = function () {
     return Session.equals('project_id', null);
 };
@@ -43,11 +49,29 @@ Template.TicketList.tickets = function () {
 Template.ticket_in_list.viewing_all_projects = Template.TicketList.viewing_all_projects;
 
 Template.ticket_in_list.project = name_getter(Projects, 'project_id');
-Template.ticket_in_list.owner = name_getter(People, 'owner_id');
+
+Template.ticket_in_list.owner = function () {
+	// console.log("Getting owner:"+this.owner_id);
+	if(this.owner_id) {
+		var user = Meteor.users.findOne(this.owner_id);
+		if(user) {
+			//consoledir("User");
+			return user.emails[0].address;
+		}
+	} 
+	return "";
+} 
+
+name_getter(People, 'owner_id');
 
 Template.ticket_in_list.events = {
     'click .delete': function () {
-    	forms.remove("issueForm",this._id);
+    	forms.getCrud("issueForm").remove(this._id);
+     },
+    'click .complete': function (event, template) {
+    	//console.log("Crud:"+forms.getCrud("issueForm"));
+    	forms.getCrud("issueForm").markComplete(this._id, template.find(".complete").checked);
      }
+     
 };
 

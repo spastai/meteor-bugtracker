@@ -21,6 +21,7 @@
 <table class="table table-striped table-bordered table-condensed table-hover">
   <thead>
     <tr>
+      <th>Status</th>
       {{# if viewing_all_projects }}
       <th>Project</th>
       {{/if}}
@@ -49,21 +50,16 @@
 
 
 <template name="ticket_in_list">
-
-{{# if viewing_all_projects }}
-<td>{{ project }}</td>
-{{/if }}
-
-<td>{{ title }}</td>
-
-<td>{{ owner }}</td>
-
-<td>
-	<button type="button" class="delete btn btn-primary">
-			<i class="icon-remove icon-white"></i>
-	</button>
-</td>
-
-
+	<td><input class="complete" type="checkbox" {{checked complete}}></td>
+	{{# if viewing_all_projects }}
+	<td>{{ project }}</td>
+	{{/if }}
+	<td {{#if complete}}class="completed"{{/if}} >{{ title }}</td>
+	<td>{{ owner }}</td>
+	<td>
+		<button type="button" class="delete btn btn-primary">
+				<i class="icon-remove icon-white"></i>
+		</button>
+	</td>
 </template>
 
