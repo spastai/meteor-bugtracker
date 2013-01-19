@@ -54,7 +54,7 @@
 	{{# if viewing_all_projects }}
 	<td>{{ project }}</td>
 	{{/if }}
-	<td {{#if complete}}class="completed"{{/if}} >{{ title }}</td>
+	<td {{#if complete}}class="completed"{{/if}} ><a href="#" class="edit">{{ title }}</a></td>
 	<td>{{ owner }}</td>
 	<td>
 		<button type="button" class="delete btn btn-primary">

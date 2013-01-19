@@ -4,6 +4,8 @@
 var issueForm = {
 		title: {type: String, label: "Issue title", placeholder: "Issue title..."},
 		project_id: {type: "select", label: "Issue title", options: projects},
+		estimated: {type: String, label: "Estimated time", placeholder: "Enter..."},
+		spent: {type: String, label: "Spent time", placeholder: "Enter..."},
 };
 
 forms.model("issueForm", issueForm, {

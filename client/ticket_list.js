@@ -1,8 +1,4 @@
-Template.ticket_list_page.events({
-	'click .new-issue': function (event, template) {
-        Session.set('page_name', 'NewIssue');
-	}
-});
+
 
 Template.TicketList.title = function () {
     var project_id = Session.get('project_id'), owner_id = Session.get('owner_id');
@@ -21,12 +17,6 @@ Template.TicketList.title = function () {
     }
     return title;
 };
-
-Template.NewIssue.events({
-	'click .save': function (event, template) {
-        Session.set('page_name', 'list_page');
-	}
-});
 
 Template.TicketList.viewing_all_projects = function () {
     return Session.equals('project_id', null);
@@ -51,20 +41,37 @@ Template.ticket_in_list.viewing_all_projects = Template.TicketList.viewing_all_p
 Template.ticket_in_list.project = name_getter(Projects, 'project_id');
 
 Template.ticket_in_list.owner = function () {
-	// console.log("Getting owner:"+this.owner_id);
 	if(this.owner_id) {
 		var user = Meteor.users.findOne(this.owner_id);
-		if(user) {
-			//consoledir("User");
-			return user.emails[0].address;
-		}
-	} 
-	return "";
+		return user ? user.emails[0].address: "";
+	} else { 
+		return "";
+	}
 } 
-
 name_getter(People, 'owner_id');
 
+Template.ticket_list_page.events({
+	'click .new-issue': function (event, template) {
+        Session.set('page_name', 'NewIssue');
+	}
+});
+
+Template.NewIssue.events({
+	'click .save': function (event, template) {
+        Session.set('page_name', 'list_page');
+	},
+	'click .cancel': function (event, template) {
+		console.log("Cancel edit issue");
+        Session.set('page_name', 'list_page');
+	}
+});
+
 Template.ticket_in_list.events = {
+    'click .edit': function () {
+    	console.log("Show issue");
+        Session.set('issueObj', this);
+        Session.set('page_name', 'NewIssue');
+     },
     'click .delete': function () {
     	forms.getCrud("issueForm").remove(this._id);
      },
