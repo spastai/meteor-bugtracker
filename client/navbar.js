@@ -14,3 +14,18 @@ Template.nav_link.events = {
     }
 }
 
+Template.LoginForm.events = {
+    'click .login': function (event, template) { 
+		var user = template.find('#inputEmail').value;
+		var password = template.find('#inputPassword').value;
+		
+		Meteor.loginWithPassword(user, password, function(error) {
+			if(error) {
+				console.log('Log in '+user+'  error: '+error.reason);
+			} else {
+				console.log("Logged in");
+			}
+		});	
+    }
+	
+}

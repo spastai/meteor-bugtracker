@@ -37,12 +37,6 @@ Template.main.viewing_ticket = function () {
 // New project 
 Template.new_project.events({
 	'click .save': function (event, template) {
-		var values = forms.getValues("projectForm",template);
-		logdir("Values:",values);
-		// TODO move to server
-		values.owner = Meteor.userId();
-		Projects.insert(values);
-		
         Session.set('page_name', 'list_page');
 		
 	}

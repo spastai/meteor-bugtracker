@@ -19,17 +19,38 @@
 	        		{{> nav_link }}
 	        	{{/each }}
 	      	</ul>
-	        <div class="navbar-text pull-right left-spacer">
-	          	{{ loginButtons align="right" }}
-	        </div>
-	      	<form class="navbar-search pull-right">
+	      	<form class="navbar-search">
 	        	<input type="text" class="search-query" placeholder="Search">
 	      	</form>
+	      	
+			{{#if currentUser}}
+				<div class="pull-right">
+					<a >{{currentUser.emails.0.address}}</a>
+				</div>
+			{{else}}
+			   	<form class="navbar-form pull-right">
+			   		{{> LoginForm}}
+			   	</form>
+			{{/if}}	      	
 		</div>
     </div>
   </div>
 </div>
 </template>
+
+<template name="LoginForm">
+		<input type="text" id="inputEmail" placeholder="Email" class="span2">
+		<input type="password" id="inputPassword" placeholder="Password" class="span2">
+		<div class="btn-group">
+			<button class="btn login">Login</button>
+			<button class="btn dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a href="#">Register</a></li>
+			</ul>
+		</div>				
+</template> 
 
 <template name="nav_link">
 <li class="{{ is_active }}"><a href="#">{{ title }}</a></li>
