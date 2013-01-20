@@ -23,7 +23,7 @@ Template.main.page_name_content = function () {
 			return Template[action]();
 		} else {
 			// sets default page
-			return Template['list_page']();
+			return Template['SchedulePage']();
 		}
 	} else {
 		return Template['Login']();
@@ -59,6 +59,10 @@ var name_getter = function (collection, field) {
 Handlebars.registerHelper('checked',function(input){
 	//console.log("Checked:"+input);
 	return input? "checked":"";
+});
+
+Handlebars.registerHelper('sessionField',function(input, field){
+    return Session.get(input)[field];
 });
 
 

@@ -1,4 +1,4 @@
-Template.TicketList.title = function () {
+Template.TicketListPage.title = function () {
     var project_id = Session.get('project_id'), owner_id = Session.get('owner_id');
     var title;
     if (project_id) {
@@ -15,12 +15,10 @@ Template.TicketList.title = function () {
     }
     return title;
 };
-
-Template.TicketList.viewing_all_projects = function () {
+Template.TicketListPage.viewing_all_projects = function () {
     return Session.equals('project_id', null);
 };
-
-Template.TicketList.tickets = function () {
+Template.TicketListPage.tickets = function () {
     var query = {};
     var add_filter = function (field) {
         var value = Session.get(field);
@@ -32,12 +30,15 @@ Template.TicketList.tickets = function () {
     add_filter('owner_id');
     return Tickets.find(query);
 };
+Template.TicketListPage.events({
+	'click .new-issue': function (event, template) {
+        Session.set('issueObj', {});
+        Session.set('page_name', 'NewIssue');
+	}
+});
 
-
-Template.ticket_in_list.viewing_all_projects = Template.TicketList.viewing_all_projects;
-
+Template.ticket_in_list.viewing_all_projects = Template.TicketListPage.viewing_all_projects;
 Template.ticket_in_list.project = name_getter(Projects, 'project_id');
-
 Template.ticket_in_list.owner = function () {
 	if(this.owner_id) {
 		var user = Meteor.users.findOne(this.owner_id);
@@ -45,29 +46,10 @@ Template.ticket_in_list.owner = function () {
 	} else { 
 		return "";
 	}
-} 
-name_getter(People, 'owner_id');
-
-Template.ticket_list_page.events({
-	'click .new-issue': function (event, template) {
-        Session.set('issueObj', {});
-        Session.set('page_name', 'NewIssue');
-	}
-});
-
-Template.NewIssue.events({
-	'click .save': function (event, template) {
-        Session.set('page_name', 'list_page');
-	},
-	'click .cancel': function (event, template) {
-		console.log("Cancel edit issue");
-        Session.set('page_name', 'list_page');
-	}
-});
-
+}
 Template.ticket_in_list.events = {
     'click .edit': function () {
-    	console.log("Show issue");
+    	//console.log("Edit issue");
         Session.set('issueObj', this);
         Session.set('page_name', 'NewIssue');
      },
@@ -78,6 +60,17 @@ Template.ticket_in_list.events = {
     	//console.log("Crud:"+forms.getCrud("issueForm"));
     	forms.getCrud("issueForm").markComplete(this._id, template.find(".complete").checked);
      }
-     
 };
+ 
+name_getter(People, 'owner_id');
+
+Template.NewIssue.events({
+	'click .save': function (event, template) {
+        Session.set('page_name', 'TicketListPage');
+	},
+	'click .cancel': function (event, template) {
+        Session.set('page_name', 'TicketListPage');
+	}
+});
+
 

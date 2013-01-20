@@ -1,0 +1,71 @@
+<template name="NewIssue">
+	{{#if sessionField "issueObj" "_id"}}
+		<h2>Edit issue:</h2>
+		<div class="span2">
+			<button type="button" class="delete btn-mini btn-primary ">
+				<i class="icon-play icon-white"></i>
+			</button>		
+		</div>
+	    <div class="progress span10">
+   			<div class="bar" style="width: 60%;"></div>
+   		</div>
+	{{else}}		
+		<h2>New Issue:</h2>
+	{{/if}}
+	{{#with formParams "issueForm" "issueObj"}}
+		{{> form}}
+	{{/with}}
+</template>
+
+<template name="TicketListPage">
+	<div class="row-fluid">
+		<div class="span9">
+			<div>
+				<form class="form-inline">
+		   			<button class="btn new-issue">New Issue</button>
+		   		</form>
+			</div>
+			<table class="table table-striped table-bordered table-condensed table-hover">
+			  <thead>
+			    <tr>
+			      <th>Status</th>
+			      {{# if viewing_all_projects }}
+			      <th>Project</th>
+			      {{/if}}
+			      <th>Title</th>
+			      <th>Owner</th>
+			      <th>Action</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    {{# each tickets }}
+			    <tr>
+			      {{> ticket_in_list }}
+			    </tr>
+			    {{/each}}
+			  </tbody>
+			</table>
+		</div>
+		<div class="span3">
+		  <div class="well">
+		    {{> sidebar }}
+		  </div>
+		</div>
+	</div>
+</template>
+
+
+<template name="ticket_in_list">
+	<td><input class="complete" type="checkbox" {{checked complete}}></td>
+	{{# if viewing_all_projects }}
+	<td>{{ project }}</td>
+	{{/if }}
+	<td {{#if complete}}class="completed"{{/if}} ><a href="#" class="edit">{{ title }}</a></td>
+	<td>{{ owner }}</td>
+	<td>
+		<button type="button" class="delete btn btn-primary">
+				<i class="icon-remove icon-white"></i>
+		</button>
+	</td>
+</template>
+

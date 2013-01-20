@@ -6,9 +6,7 @@
 <body>
   {{> navbar }}
   <div class="container-fluid">
-    <div class="row-fluid">
       {{> main }}
-    </div>
   </div>
   <!-- Placed at the end of the document so the pages load faster -->
 </body>
@@ -17,12 +15,8 @@
 	{{{page_name_content}}}
 </template>
 
-<template name="list_page">
-	{{# if viewing_ticket }}
-		{{> ticket_detail_page }}
-	{{ else }}
-		{{> ticket_list_page }}
-	{{/if }}
+<template name="SchedulePage">
+	Schedule
 </template>
 
 <template name="new_project">

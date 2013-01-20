@@ -12,10 +12,10 @@ forms.model("issueForm", issueForm, {
 	create: function(template) {
 		var values = forms.getValues("issueForm",template);
 		// this indicates it is new object
-		values["_id"] = Session.get("issueObj")._id;
 		values.owner_id = Meteor.userId();
-		logdir("Issue values:",values);
-		if(values._id) {
+		// logdir("Issue values:",values);
+		if(Session.get("issueObj")._id) {
+			values["_id"] = Session.get("issueObj")._id;
 			Tickets.update({_id:values._id}, values);
 		} else {
 			Tickets.insert(values);

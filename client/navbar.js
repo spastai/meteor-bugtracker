@@ -1,6 +1,6 @@
 Template.navbar.nav_links = [
-    {page_name: 'Today', title: 'Today'},
-    {page_name: 'list_page', title: 'Issues'},
+    {page_name: 'SchedulePage', title: 'Schedule'},
+    {page_name: 'TicketListPage', title: 'Issues'},
     {page_name: 'new_project', title: 'Projects'},
     ];
 
@@ -16,8 +16,9 @@ Template.nav_link.events = {
 
 Template.LoginForm.events = {
     'click .login': function (event, template) { 
-		var user = template.find('#inputEmail').value;
-		var password = template.find('#inputPassword').value;
+    	console.log("Do login");
+		var user = template.find('#username').value;
+		var password = template.find('#password').value;
 		
 		Meteor.loginWithPassword(user, password, function(error) {
 			if(error) {
