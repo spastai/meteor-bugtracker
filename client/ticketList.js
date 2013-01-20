@@ -64,6 +64,7 @@ Template.ticket_in_list.events = {
  
 name_getter(People, 'owner_id');
 
+
 Template.NewIssue.events({
 	'click .save': function (event, template) {
         Session.set('page_name', 'TicketListPage');
@@ -74,3 +75,35 @@ Template.NewIssue.events({
 });
 
 
+Template.PomodoroTimer.events({
+	'click .start': function (event, template) {
+		start(template);
+	},
+});
+
+var period = 25 * 60 * 1000;
+var timeLeft = period;
+var endTime = null;
+var timer = null; 
+
+function start(template) {
+	if(null == timer) {
+		endTime = new Date().getTime()+timeLeft;
+		checkTime(template);
+	} else {
+		pause();
+	}
+}
+
+function checkTime(template) {
+	timeLeft = endTime - new Date().getTime();
+	if(timeLeft > 0) {
+		$(template.find(".bar")).width((100-timeLeft/period*100)+'%');
+		timer = setTimeout(function(){ checkTime(template) },1000);
+	} 
+}
+
+function pause() {
+    clearInterval(timer);
+    timer = null;		
+}
