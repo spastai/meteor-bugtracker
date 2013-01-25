@@ -53,5 +53,7 @@
 </template> 
 
 <template name="nav_link">
-<li class="{{ is_active }}"><a href="#">{{ title }}</a></li>
+	{{#if currentUser}}
+	<li class="{{ is_active }}"><a href="#">{{ title }}</a></li>
+	{{/if}}
 </template>

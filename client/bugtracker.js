@@ -1,11 +1,12 @@
 // Collections
 //
 // {name}
-Projects = new Meteor.Collection('Projects');
+Meteor.subscribe("projects");
 // {project_id, owner_id, title, body, comments: [{author_id, text, timestamp}]}
-Tickets = new Meteor.Collection('Tickets');
+// Tickets = new Meteor.Collection('Tickets');
+
 // {login, name}
-People = new Meteor.Collection('People');
+//People = new Meteor.Collection('People');
 
 // Chosen filters in sidebar
 Session.set('project_id', null);
@@ -41,19 +42,6 @@ Template.new_project.events({
 		
 	}
 });	
-
-
-// Utils 
-// TODO - separate file
-var name_getter = function (collection, field) {
-    return function () {
-        if (this[field]) {
-            var obj = collection.findOne({_id: this[field]});
-            return obj ? obj.name : '';
-        }
-        return '';
-    };
-};
 
 // Helpers
 Handlebars.registerHelper('checked',function(input){

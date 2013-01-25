@@ -1,3 +1,3 @@
-Projects = new Meteor.Collection('Projects');
-Tickets = new Meteor.Collection('Tickets');
-People = new Meteor.Collection('People');
+Meteor.publish("projects", function(begin, end, pageSize, currentPage, sort) {
+  return Projects.find({});
+});

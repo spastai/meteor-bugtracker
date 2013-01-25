@@ -38,7 +38,11 @@ Template.TicketListPage.events({
 });
 
 Template.ticket_in_list.viewing_all_projects = Template.TicketListPage.viewing_all_projects;
-Template.ticket_in_list.project = name_getter(Projects, 'project_id');
+//Template.ticket_in_list.project = name_getter(Projects, 'project_id');
+Template.ticket_in_list.project = function () {
+	var obj = Projects.findOne({_id: this['project_id']});
+	return obj ? obj.name : '';
+};
 Template.ticket_in_list.owner = function () {
 	if(this.owner_id) {
 		var user = Meteor.users.findOne(this.owner_id);
@@ -46,7 +50,7 @@ Template.ticket_in_list.owner = function () {
 	} else { 
 		return "";
 	}
-}
+};
 Template.ticket_in_list.events = {
     'click .edit': function () {
     	//console.log("Edit issue");
@@ -62,7 +66,8 @@ Template.ticket_in_list.events = {
      }
 };
  
-name_getter(People, 'owner_id');
+// not clear what it is
+// name_getter(People, 'owner_id');
 
 
 Template.NewIssue.events({
