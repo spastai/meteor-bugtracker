@@ -3,6 +3,7 @@
 // {name}
 Meteor.subscribe("projects");
 // {project_id, owner_id, title, body, comments: [{author_id, text, timestamp}]}
+Meteor.subscribe("issues");
 // Tickets = new Meteor.Collection('Tickets');
 
 // {login, name}
@@ -24,24 +25,15 @@ Template.main.page_name_content = function () {
 			return Template[action]();
 		} else {
 			// sets default page
-			return Template['SchedulePage']();
+			return Template['ProjectList']();
 		}
 	} else {
-		return Template['Login']();
+		return Template['ProjectList']();
 	} 
 };
 Template.main.viewing_ticket = function () {
     return ! Session.equals('ticket_id', null);
 };
-
-
-// New project 
-Template.new_project.events({
-	'click .save': function (event, template) {
-        Session.set('page_name', 'list_page');
-		
-	}
-});	
 
 // Helpers
 Handlebars.registerHelper('checked',function(input){

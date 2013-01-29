@@ -25,7 +25,17 @@
 	      	
 			{{#if currentUser}}
 				<div class="pull-right navbar-text">
-					<a >{{currentUser.emails.0.address}}</a>
+					
+					<div class="btn-group">
+						<button type="button" class="btn login">{{currentUser.emails.0.address}}</button>
+						<button class="btn dropdown-toggle" data-toggle="dropdown">
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a href="#" class="logout">Logout</a></li>
+						</ul>
+					</div>				
+					
 				</div>
 			{{else}}
 			   	<form class="navbar-form pull-right">

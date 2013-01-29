@@ -1,8 +1,12 @@
 Template.navbar.nav_links = [
-    {page_name: 'SchedulePage', title: 'Schedule'},
+    {page_name: 'ProjectList', title: 'Projects'},
     {page_name: 'TicketListPage', title: 'Issues'},
-    {page_name: 'new_project', title: 'Projects'},
-    ];
+];
+Template.navbar.events = {
+    'click .logout': function (event, template) {
+    	Meteor.logout();
+    } 	
+};
 
 Template.nav_link.is_active = function () {
     return Session.equals('page_name', this.page_name) ? 'active' : '';
@@ -27,6 +31,6 @@ Template.LoginForm.events = {
 				console.log("Logged in");
 			}
 		});	
-    }
-	
+    },
+    
 }

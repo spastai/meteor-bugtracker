@@ -1,0 +1,83 @@
+<template name="NewIssue">
+		{{#if sessionField "issueObj" "_id"}}
+			<h2>Edit issue:</h2>
+			{{> PomodoroTimer}}
+		{{else}}		
+			<h2>New Issue:</h2>
+		{{/if}}
+	<div class="row-fluid">
+		{{#with formParams "issueForm" "issueObj"}}
+			{{> form}}
+		{{/with}}
+	</div>
+</template>
+
+<template name="PomodoroTimer">
+	<div class="row-fluid">
+		<div class="span1" >
+			<a class="btn btn-small pull-right start" href="#">
+				<i class="icon-play"></i> Start</a>		
+		</div>
+		<div class="span11" >
+		    <div class="progress">
+	   			<div class="bar" style="width: 0%;"></div>
+	   		</div>
+   		</div>
+	</div>
+</template>
+
+
+<template name="TicketListPage">
+	<div class="row-fluid">
+		<div class="span9">
+			<div>
+				<form class="form-inline">
+		   			<button class="btn new-issue">New Issue</button>
+					<div class="btn-group" data-toggle="buttons-checkbox">		   			
+		   				<button class="btn hide-done">Hide done issues</button>
+		   			</div>
+		   		</form>
+			</div>
+			
+			<div class="accordion" id="accordion2">
+		    	{{# each tickets }}
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<div class="row-fluid">
+							<div class="span1 visible-desktop">
+								<input class="complete" type="checkbox" {{checked complete}}>
+							</div>
+							<div class="span2 visible-desktop" style="color: black">
+								{{# if viewing_all_projects }}
+									{{ project }}
+								{{/if}}
+							</div>
+							<div class="span6">
+								<a class="accordion-toggle {{#if complete}}completed{{/if}}"  data-toggle="collapse"
+									data-parent="#accordion2" href="#{{_id}}">{{ title }}</a>
+							</div>
+							<div class="span2 visible-desktop" style="color: black">
+								{{owner}}
+							</div>
+							<div class="span1 visible-desktop">
+								<button type="button" class="delete btn btn-primary">
+									<i class="icon-remove icon-white"></i>
+								</button>				
+							</div>
+						</div>			
+					</div>
+					<div id="{{_id}}" class="accordion-body collapse out">
+						<div class="accordion-inner">Description</div>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+				
+		</div>
+		<div class="span3">
+		  <div class="well">
+		    {{> sidebar }}
+		  </div>
+		</div>
+	</div>
+</template>

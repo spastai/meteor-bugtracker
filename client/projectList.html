@@ -1,0 +1,38 @@
+<template name="ProjectList">
+	<div>
+		<form class="form-inline">
+   			<button class="btn new-project">New Project</button>
+   		</form>
+	</div>
+	<table class="table table-striped table-bordered table-condensed table-hover">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th style="width: 5%;">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each projects}}
+			<tr>
+				<td class="edit-project"><a href="#">{{name}}</a></td>
+				<td>
+					<button type="button" class="delete btn btn-primary">
+							<i class="icon-remove icon-white"></i>
+					</button>
+				</td>
+			</tr>
+			
+			{{/each}}
+		</tbody>
+</template>
+
+<template name="EditProject">
+	{{#if sessionField "projectObj" "_id"}}
+		<h2>Edit Project:</h2>
+	{{else}}				
+		<h2>New Project:</h2>
+	{{/if}}
+	{{#with formParams "projectForm" "projectObj"}}
+		{{> form}}
+	{{/with}}
+</template>

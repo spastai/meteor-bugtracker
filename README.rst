@@ -1,20 +1,16 @@
-BugTracker
+TaskTracker
 ==========
 
-**Live demo:** http://bugtracker.meteor.com
+This is a alternative for commercial products (Jira like) and freeware (Bugzila) made on Meteor
+Bugs and issues hare are called tasks, so this tool could be used for Agile projects.  
 
-This is a simple bug-tracking application, built using Meteor framework.
+Demo:
+http://tasktracker.meteor.com
 
-Features:
+Benefits:
 
 * Filter tickets by owner and project
-* View ticket details, change owner, add comments
-
-TODO:
-
-* Authentication
-* Create new tickets
-* More ticket fields, filter by them 
-* Manage projects
+* Responsive design makes it compatible with mobiles
+* Agile compatible - has estimations, time spent and even Pomodoro timer
 
 .. vim:set ft=rst
