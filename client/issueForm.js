@@ -4,8 +4,11 @@
 var issueForm = {
 		title: {type: String, label: "Issue title", placeholder: "Issue title..."},
 		project_id: {type: "select", label: "Issue title", options: projects},
+		description: {type: "textarea", label: "Description", placeholder: "Describe..."},
 		estimated: {type: String, label: "Estimated time", placeholder: "Enter..."},
 		spent: {type: String, label: "Spent time", placeholder: "Enter..."},
+		priority: {type: "select", label: "Priority", options: priorities},
+		importance: {type: "select", label: "Importance", options: importancies},
 };
 
 forms.model("issueForm", issueForm, {
@@ -35,4 +38,22 @@ function projects() {
     	return {value: item._id, title: item.name};
 	});
 }
- 
+
+function priorities() {
+	return [
+	  {value:"blocker", title:"Blocker"},
+	  {value:"critical", title:"Critical"},
+	  {value:"major", title:"Major"},
+	  {value:"minor", title:"Minor"},
+	  {value:"trivial", title:"Trivial"},
+	];
+} 
+
+function importancies() {
+	return [
+	  {value:"high", title:"High"},
+	  {value:"normal", title:"Normal"},
+	  {value:"low", title:"Low"},
+	];
+
+} 
