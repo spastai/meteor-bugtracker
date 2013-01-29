@@ -1,0 +1,3 @@
+[submodule "client/packages/forms-frame"]
+	path = client/packages/forms-frame
+	url = https://spastai@bitbucket.org/spastai/meteor-forms-frame.git
