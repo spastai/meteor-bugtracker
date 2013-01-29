@@ -40,7 +40,7 @@
 			</div>
 			
 			<div class="accordion" id="accordion2">
-		    	{{# each tickets }}
+		    	{{#each tickets }}
 				<div class="accordion-group">
 					<div class="accordion-heading">
 						<div class="row-fluid">
@@ -68,6 +68,7 @@
 					</div>
 					<div id="{{_id}}" class="accordion-body collapse out">
 						<div class="accordion-inner">Description</div>
+			   			<button class="btn btn-primary edit-issue">Edit Issue</button>
 					</div>
 				</div>
 				{{/each}}

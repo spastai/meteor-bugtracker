@@ -30,10 +30,10 @@ Template.TicketListPage.owner = function () {
 
 Template.TicketListPage.events({
 	'click .new-issue': function (event, template) {
-        Session.set('issueObj', {});
+        Session.set('issueObj', {project_id: Session.get("project_id") || ""});
         Session.set('page_name', 'NewIssue');
 	}
-    , 'click .edit': function () {
+    , 'click .edit-issue': function () {
     	//console.log("Edit issue");
         Session.set('issueObj', this);
         Session.set('page_name', 'NewIssue');
