@@ -11,6 +11,13 @@ Template.TicketListPage.tickets = function () {
     };
     add_filter('project_id');
     add_filter('owner_id');
+    if(Session.get("filterHideCompleted")) {
+    	query["$or"] = [
+    		{complete: {$exists: false}},
+    		{complete: false}]; 
+    }
+    consoledir("Filtering tickets:",query); 
+    
     return Tickets.find(query);
 };
 Template.TicketListPage.viewing_all_projects = Template.TicketListPage.viewing_all_projects;
@@ -45,6 +52,12 @@ Template.TicketListPage.events({
     	//console.log("Crud:"+forms.getCrud("issueForm"));
     	forms.getCrud("issueForm").markComplete(this._id, template.find(".complete").checked);
      }
+    , 'click .hide-done': function (event, template) {
+    	//console.log("Template:",$(event.target).hasClass('active'));
+    	Session.set("filterHideCompleted",!$(event.target).hasClass('active'));
+    	//consoledir("Event:",event);
+    }
+     
 });
 
 Template.NewIssue.events({
