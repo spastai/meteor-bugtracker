@@ -16,7 +16,7 @@ Template.TicketListPage.tickets = function () {
     		{complete: {$exists: false}},
     		{complete: false}]; 
     }
-    consoledir("Filtering tickets:",query); 
+//    consoledir("Filtering tickets:",query); 
     
     return Tickets.find(query);
 };
@@ -56,6 +56,9 @@ Template.TicketListPage.events({
     	//console.log("Template:",$(event.target).hasClass('active'));
     	Session.set("filterHideCompleted",!$(event.target).hasClass('active'));
     	//consoledir("Event:",event);
+    }
+    , 'click .play-sound': function (event, template) {
+    	Session.set("playSound",!$(event.target).hasClass('active'));
     }
      
 });

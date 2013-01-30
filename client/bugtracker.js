@@ -41,6 +41,10 @@ Handlebars.registerHelper('checked',function(input){
 	return input? "checked":"";
 });
 
+Handlebars.registerHelper('session',function(input){
+    return Session.get(input);
+});
+
 Handlebars.registerHelper('sessionField',function(input, field){
     return Session.get(input)[field];
 });

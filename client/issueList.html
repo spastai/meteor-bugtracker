@@ -1,7 +1,6 @@
 <template name="NewIssue">
 		{{#if sessionField "issueObj" "_id"}}
-			<h2>Edit issue:</h2>
-			{{> PomodoroTimer}}
+			<h2>Edit issue:</h2>			
 		{{else}}		
 			<h2>New Issue:</h2>
 		{{/if}}
@@ -14,11 +13,11 @@
 
 <template name="PomodoroTimer">
 	<div class="row-fluid">
-		<div class="span1" >
-			<a class="btn btn-small pull-right start" href="#">
+		<div class="span2" >
+			<a class="btn btn-small start" href="#">
 				<i class="icon-play"></i> Start</a>		
 		</div>
-		<div class="span11" >
+		<div class="span10" >
 		    <div class="progress">
 	   			<div class="bar" style="width: 0%;"></div>
 	   		</div>
@@ -36,8 +35,12 @@
 		   			<button class="btn new-issue">New Issue</button>
 					<div class="btn-group" data-toggle="buttons-checkbox">		   			
 		   				<button class="btn hide-done">Hide done issues</button>
+		   				<button class="btn play-sound">Play</button>
 		   			</div>
 					{{/constant}}
+			   		{{#if session "playSound"}}
+			   			{{> playStop}}
+			   		{{/if}}
 		   		</form>
 			</div>
 			
@@ -69,6 +72,7 @@
 						</div>			
 					</div>
 					<div id="{{_id}}" class="accordion-body collapse out">
+						{{> PomodoroTimer}}
 						<div class="accordion-inner">{{description}}</div>
 			   			<button class="btn btn-primary edit-issue">Edit Issue</button>
 					</div>
@@ -83,4 +87,16 @@
 		  </div>
 		</div>
 	</div>
+</template>
+
+
+<template name="playStop">
+	{{#constant}}
+	<embed type="application/x-shockwave-flash" 
+		flashvars="audioUrl=test.mp3&autoPlay=true" 
+		src="http://www.google.com/reader/ui/3523697345-audio-player.swf"  
+		width="0" 
+		height="0" 
+		quality="best"></embed>
+	{{/constant}}
 </template>
