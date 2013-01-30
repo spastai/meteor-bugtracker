@@ -50,15 +50,12 @@ Template.TicketListPage.events({
      },
     'click .complete': function (event, template) {
     	//console.log("Crud:"+forms.getCrud("issueForm"));
-    	forms.getCrud("issueForm").markComplete(this._id, template.find(".complete").checked);
+    	forms.getCrud("issueForm").markComplete(this._id, event.target.checked);
      }
     , 'click .hide-done': function (event, template) {
     	//console.log("Template:",$(event.target).hasClass('active'));
     	Session.set("filterHideCompleted",!$(event.target).hasClass('active'));
     	//consoledir("Event:",event);
-    }
-    , 'click .play-sound': function (event, template) {
-    	Session.set("playSound",!$(event.target).hasClass('active'));
     }
      
 });
@@ -72,19 +69,21 @@ Template.NewIssue.events({
 	}
 });
 
-
 Template.PomodoroTimer.events({
 	'click .start': function (event, template) {
+		Session.set("pomodoro_taks",this._id);
 		start(template);
 	},
 });
 
-var period = 25 * 60 * 1000;
+var period = 20 * 60 * 1000;
+//var period = 5 * 1000;
 var timeLeft = period;
 var endTime = null;
 var timer = null; 
 
 function start(template) {
+//	Session.set("playSound", false);
 	if(null == timer) {
 		endTime = new Date().getTime()+timeLeft;
 		checkTime(template);
@@ -98,10 +97,23 @@ function checkTime(template) {
 	if(timeLeft > 0) {
 		$(template.find(".bar")).width((100-timeLeft/period*100)+'%');
 		timer = setTimeout(function(){ checkTime(template) },1000);
-	} 
+	} else {
+		$(template.find(".bar")).width('100%');
+		completed();
+	}
 }
 
 function pause() {
     clearInterval(timer);
     timer = null;		
+}
+
+function completed() {
+	timeLeft = period;
+    clearInterval(timer);
+    timer = null;		
+    
+    var id = Session.get("pomodoro_taks");
+    Tickets.update({_id:id}, {$inc: {spent: 20}});
+//	Session.set("playSound", true);
 }

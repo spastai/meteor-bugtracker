@@ -35,7 +35,6 @@
 		   			<button class="btn new-issue">New Issue</button>
 					<div class="btn-group" data-toggle="buttons-checkbox">		   			
 		   				<button class="btn hide-done">Hide done issues</button>
-		   				<button class="btn play-sound">Play</button>
 		   			</div>
 					{{/constant}}
 			   		{{#if session "playSound"}}
@@ -72,9 +71,14 @@
 						</div>			
 					</div>
 					<div id="{{_id}}" class="accordion-body collapse out">
-						{{> PomodoroTimer}}
-						<div class="accordion-inner">{{description}}</div>
-			   			<button class="btn btn-primary edit-issue">Edit Issue</button>
+						<div class="accordion-inner">
+							{{> PomodoroTimer}}
+							{{description}}
+							<div>
+								Time spent: {{spent}}
+							</div>
+							<button class="btn btn-primary edit-issue">Edit Issue</button>
+						</div>
 					</div>
 				</div>
 				{{/each}}
@@ -93,7 +97,7 @@
 <template name="playStop">
 	{{#constant}}
 	<embed type="application/x-shockwave-flash" 
-		flashvars="audioUrl=test.mp3&autoPlay=true" 
+		flashvars="audioUrl=crank-1.mp3&autoPlay=true" 
 		src="http://www.google.com/reader/ui/3523697345-audio-player.swf"  
 		width="0" 
 		height="0" 

@@ -29,6 +29,7 @@ forms.model("issueForm", issueForm, {
 		Tickets.remove({_id:id});
 	},
 	markComplete: function(id,status) {
+		console.log("Mark completed:"+id+" status:"+status);
 		Tickets.update({_id:id},{$set:{complete:status}});
 	}
 });
