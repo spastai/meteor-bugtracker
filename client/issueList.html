@@ -51,12 +51,12 @@
 							<div class="span1 visible-desktop">
 								<input class="complete" type="checkbox" {{checked complete}}>
 							</div>
+							{{# if viewing_all_projects }}
 							<div class="span2 visible-desktop" style="color: black">
-								{{# if viewing_all_projects }}
 									{{ project }}
-								{{/if}}
 							</div>
-							<div class="span6">
+							{{/if}}
+							<div class="{{# if viewing_all_projects }}span6{{else}}span8{{/if}}">
 								<a class="accordion-toggle {{#if complete}}completed{{/if}}"  data-toggle="collapse"
 									data-parent="#accordion2" href="#{{_id}}">{{ title }}</a>
 							</div>
