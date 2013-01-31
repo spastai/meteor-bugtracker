@@ -6,6 +6,7 @@ var issueForm = {
 		project_id: {type: "select", label: "Issue title", options: projects},
 		description: {type: "textarea", label: "Description", placeholder: "Describe..."},
 		estimated: {type: String, label: "Estimated time", placeholder: "Enter..."},
+		type: {type: "select", label: "Type", options: types},
 		spent: {type: String, label: "Spent time", placeholder: "Enter..."},
 		priority: {type: "select", label: "Priority", options: priorities},
 		importance: {type: "select", label: "Importance", options: importancies},
@@ -39,6 +40,15 @@ function projects() {
     	return {value: item._id, title: item.name};
 	});
 }
+
+function types() {
+	return [
+	  {value:"task", title:"Task"},
+	  {value:"story", title:"Story"},
+	  {value:"bug", title:"Bug"},
+	];
+} 
+
 
 function priorities() {
 	return [
