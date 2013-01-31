@@ -4,7 +4,6 @@
 Meteor.subscribe("projects");
 // {project_id, owner_id, title, body, comments: [{author_id, text, timestamp}]}
 Meteor.subscribe("issues");
-// Tickets = new Meteor.Collection('Tickets');
 
 // {login, name}
 //People = new Meteor.Collection('People');
