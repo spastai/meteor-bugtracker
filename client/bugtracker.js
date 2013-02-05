@@ -15,6 +15,11 @@ Session.set('owner_id', null);
 // Currently viewed ticket
 Session.set('ticket_id', null);
 
+Session.set("filterHideCompleted",true);
+
+Meteor.startup(function () {
+});
+
 // Main view renderer
 Template.main.page_name_content = function () {
 	if(Meteor.user())  {
