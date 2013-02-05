@@ -26,6 +26,19 @@ Template.TicketListPage.project = function () {
 	var obj = Projects.findOne({_id: this['project_id']});
 	return obj ? obj.name : '';
 };
+
+var priorityMapping = {
+	  blocker:"label-important",
+	  critical:"label-warning",
+	  major:"label-success",
+	  minor:"label-info",
+	  trivial:""
+};
+
+Template.TicketListPage.priorityLabel = function () {
+	return priorityMapping[this.priority];
+}
+
 Template.TicketListPage.owner = function () {
 	if(this.owner_id) {
 		var user = Meteor.users.findOne(this.owner_id);
