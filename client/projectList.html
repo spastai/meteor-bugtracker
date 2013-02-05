@@ -35,4 +35,33 @@
 	{{#with formParams "projectForm" "projectObj"}}
 		{{> form}}
 	{{/with}}
+	
+    <form class="form-horizontal">
+ 		<div class="control-group">
+			<label class="control-label" for="version">Version</label>
+			<div class="controls">    
+			    <div class="input-append">
+				    <input type="text" id="version">
+		    		<div class="btn-group">
+						<button class="btn saveVersion" tabindex="-1">Save</button>
+						<button class="btn dropdown-toggle" tabindex="-1" data-toggle="dropdown">
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a href="#">Delete</a></li>
+						</ul>    		
+		    		</div>
+		    	</div>
+		    </div>
+	 		<div class="control-group">
+				<div class="controls">    
+					<select multiple="multiple">
+						{{#each sessionField "projectObj" "versions"}}
+							<option>{{this}}</option>
+						{{/each}}
+					</select>    	
+				</div>
+			</div>
+		</div>
+    </form>	
 </template>

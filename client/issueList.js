@@ -76,8 +76,8 @@ Template.PomodoroTimer.events({
 	},
 });
 
-var period = 20 * 60 * 1000;
-//var period = 5 * 1000;
+//var period = 20 * 60 * 1000;
+var period = 5 * 1000;
 var timeLeft = period;
 var endTime = null;
 var timer = null; 
@@ -114,6 +114,8 @@ function completed() {
     timer = null;		
     
     var id = Session.get("pomodoro_taks");
-    Tickets.update({_id:id}, {$inc: {spent: 20}});
+    Tickets.update({_id:id}, {$inc: {spent: 20}}, function(err) {
+    	err ? consoleloge("Updating task "+id+" failed: "+err) : consolelog("Updating task "+id+" for 20m"); 
+    });
 //	Session.set("playSound", true);
 }

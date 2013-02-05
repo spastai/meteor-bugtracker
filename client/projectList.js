@@ -26,5 +26,15 @@ Template.EditProject.events({
 	},
 	'click .cancel': function (event, template) {
         Session.set('page_name', 'ProjectList');
+	},
+	'click .saveVersion': function (event, template) {
+		var version = $(template.find('#version')).val();
+		console.log("Save version:"+version);
+		var project = Session.get('projectObj');
+		if(!project.versions) {
+			project.versions = [];
+		}
+		project.versions.push(version);
+		Session.set('projectObj', project);
 	}
 });
