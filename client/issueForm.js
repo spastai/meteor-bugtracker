@@ -8,7 +8,7 @@ var issueForm = {
 		estimated: {type: String, label: "Estimated time", placeholder: "Enter..."},
 		type: {type: "select", label: "Type", options: types},
 		spent: {type: String, label: "Spent time", placeholder: "Enter..."},
-		priority: {type: "select", label: "Priority", options: priorities},
+		priority: {type: "select", label: "Urgency", options: priorities},
 		importance: {type: "select", label: "Importance", options: importancies},
 };
 
