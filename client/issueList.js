@@ -1,6 +1,18 @@
 Template.TicketListPage.viewing_all_projects = function () {
     return Session.equals('project_id', null);
 };
+// This could be moved to Helper
+Template.TicketListPage.sortTitle = function(title,id) {
+	var sortIcon = "";
+	if(id == Session.get("sortBy")) {
+		if(1 == Session.get("sortOrder")) {
+			sortIcon = '<i class="icon-arrow-up">';
+		} else if(-1 == Session.get("sortOrder")) {
+			sortIcon = '<i class="icon-arrow-down">';
+		} 
+	}
+	return '<a href="#" class="sort" id="sort-'+id+'">'+title+sortIcon+'</i></a>';
+};
 Template.TicketListPage.tickets = function () {
     var query = {};
     var add_filter = function (field) {
@@ -11,14 +23,17 @@ Template.TicketListPage.tickets = function () {
     };
     add_filter('project_id');
     add_filter('owner_id');
+    
     if(Session.get("filterHideCompleted")) {
     	query["$or"] = [
     		{complete: {$exists: false}},
     		{complete: false}]; 
     }
-//    consoledir("Filtering tickets:",query); 
+//    consoledir("Filtering tickets:",query);
+	var sort = {};
+	sort[(Session.get("sortBy") || "propertyName")] = Session.get("sortOrder") || 0;     
     
-    return Tickets.find(query);
+    return Tickets.find(query, {sort: sort});
 };
 Template.TicketListPage.viewing_all_projects = Template.TicketListPage.viewing_all_projects;
 //Template.ticket_in_list.project = name_getter(Projects, 'project_id');
@@ -74,7 +89,10 @@ Template.TicketListPage.events({
     	Session.set("filterHideCompleted",!$(event.target).hasClass('active'));
     	//consoledir("Event:",event);
     }
-     
+	, 'click .sort': function (event, template) {
+		Session.set("sortBy", $(event.currentTarget).attr("id").substring("sort-".length));
+		Session.set("sortOrder", Session.get("sortOrder") == -1 ? 1 : -1);
+	}     
 });
 
 Template.NewIssue.events({

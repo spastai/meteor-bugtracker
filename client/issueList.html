@@ -43,6 +43,28 @@
 		   		</form>
 			</div>
 			
+			<div class="row-fluid visible-desktop">
+				<div class="span1">
+					{{{sortTitle "Status" "complete"}}}
+				</div>
+				<div class="span1" style="color: black">
+					{{{sortTitle "Priority" "importance"}}}				
+				</div>
+				{{# if viewing_all_projects }}
+				<div class="span1" style="color: black">
+					{{{sortTitle "Project" "project_id"}}}									
+				</div>
+				{{/if}}
+				<div class="{{# if viewing_all_projects }}span6{{else}}span7{{/if}}">
+					{{{sortTitle "Issue" "title"}}}														
+				</div>
+				<div class="span2" style="color: black">
+					{{{sortTitle "Owner" "owner_id"}}}																			
+				</div>
+				<div class="span1">
+					Actions
+				</div>
+			</div>
 			<div class="accordion" id="accordion2">
 		    	{{#each tickets }}
 				<div class="accordion-group">

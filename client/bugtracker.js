@@ -29,10 +29,10 @@ Template.main.page_name_content = function () {
 			return Template[action]();
 		} else {
 			// sets default page
-			return Template['ProjectList']();
+			return Template['TicketListPage']();
 		}
 	} else {
-		return Template['ProjectList']();
+		return Template['TicketListPage']();
 	} 
 };
 Template.main.viewing_ticket = function () {

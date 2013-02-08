@@ -1,13 +1,12 @@
 Template.navbar.nav_links = [
-    {page_name: 'ProjectList', title: 'Projects'},
     {page_name: 'TicketListPage', title: 'Issues'},
+    {page_name: 'ProjectList', title: 'Projects'},
 ];
 Template.navbar.events = {
     'click .logout': function (event, template) {
     	Meteor.logout();
     } 	
 };
-
 Template.nav_link.is_active = function () {
     return Session.equals('page_name', this.page_name) ? 'active' : '';
 }
