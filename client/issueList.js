@@ -41,7 +41,6 @@ Template.TicketListPage.project = function () {
 	var obj = Projects.findOne({_id: this['project_id']});
 	return obj ? obj.name : '';
 };
-
 var priorityMapping = {
 	  blocker:"label-important",
 	  critical:"label-warning",
@@ -49,9 +48,23 @@ var priorityMapping = {
 	  minor:"label-info",
 	  trivial:""
 };
-
 Template.TicketListPage.priorityLabel = function () {
 	return priorityMapping[this.priority];
+}
+Template.TicketListPage.completedPomodoro = function() {
+	var e = (this.estimated) / pomodoroLength;
+	var s = this.spent / pomodoroLength;
+	return  s < e ? s : e;
+}
+Template.TicketListPage.plannedPomodoro = function() {
+	var e = this.estimated / pomodoroLength;
+	var s = this.spent / pomodoroLength;
+	return s < e ? e-s : 0;
+}
+Template.TicketListPage.overduePomodoro = function() {
+	var e = this.estimated / pomodoroLength;
+	var s = this.spent / pomodoroLength;
+	return s > e ? s-e : 0;
 }
 
 Template.TicketListPage.owner = function () {
@@ -62,11 +75,8 @@ Template.TicketListPage.owner = function () {
 		return "";
 	}
 };
-
 Template.TicketListPage.rendered = function() {
-	console.log("TicketListPage.rendered "+Session.get("playSound"));
 }
-
 
 Template.TicketListPage.events({
 	'click .new-issue': function (event, template) {

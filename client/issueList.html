@@ -54,7 +54,7 @@
 				</div>
 				{{/if}}
 				<div class="{{# if viewing_all_projects }}span6{{else}}span7{{/if}}">
-					{{{sortTitle "Issue" "title"}}}														
+					{{{sortTitle "Issue" "title"}}}											
 				</div>
 				<div class="span2" style="color: black">
 					{{{sortTitle "Owner" "owner_id"}}}																			
@@ -81,7 +81,17 @@
 							{{/if}}
 							<div class="{{# if viewing_all_projects }}span6{{else}}span7{{/if}}">
 								<a class="accordion-toggle {{#if complete}}completed{{/if}}"  data-toggle="collapse"
-									data-parent="#accordion2" href="#{{_id}}">{{ title }}</a>
+									data-parent="#accordion2" href="#{{_id}}">{{ title }}
+									{{#for completedPomodoro}}
+										<span class="badge badge-success"><i class="icon-play-circle icon-white"></i></span>
+									{{/for}}
+									{{#for plannedPomodoro}}
+										<span class="badge"><i class="icon-play-circle icon-white"></i></span>
+									{{/for}}
+									{{#for overduePomodoro}}
+										<span class="badge badge-important"><i class="icon-play-circle icon-white"></i></span>
+									{{/for}}
+								</a>
 							</div>
 							<div class="span2 visible-desktop" style="color: black">
 								{{owner}}

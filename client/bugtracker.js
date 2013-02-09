@@ -1,3 +1,4 @@
+var pomodoroLength = 20;
 // Collections
 //
 // {name}
@@ -53,4 +54,11 @@ Handlebars.registerHelper('sessionField',function(input, field){
     return Session.get(input)[field];
 });
 
+Handlebars.registerHelper('for', function(context, block) {
+  var ret = "";
 
+  for(var i=0; i < context; i++) {
+    ret = ret + block(context[i]);
+  }
+  return ret;
+});
