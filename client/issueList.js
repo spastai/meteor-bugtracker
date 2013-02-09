@@ -171,5 +171,5 @@ function completed() {
     // Trick to play sound only once
     console.log("Starting play sound:"+new Date());
 	Session.set("playSound", new Date());
-	setInterval(function(){Session.set("playSound", false);console.log("Stop play sound:"+new Date());},3000);
+	setTimeout(function(){Session.set("playSound", false);console.log("Stop play sound:"+new Date());},3000);
 }
