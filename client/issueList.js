@@ -169,6 +169,7 @@ function completed() {
     	err ? consoleloge("Updating task "+id+" failed: "+err) : consolelog("Updating task "+id+" for 20m"); 
     });
     // Trick to play sound only once
+    console.log("Starting play sound:"+new Date());
 	Session.set("playSound", new Date());
-	setInterval(function(){Session.set("playSound", false);},3000);
+	setInterval(function(){Session.set("playSound", false);console.log("Stop play sound:"+new Date());},3000);
 }
