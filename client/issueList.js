@@ -63,12 +63,18 @@ Template.TicketListPage.owner = function () {
 	}
 };
 
+Template.TicketListPage.rendered = function() {
+	console.log("TicketListPage.rendered "+Session.get("playSound"));
+}
+
+
 Template.TicketListPage.events({
 	'click .new-issue': function (event, template) {
         Session.set('issueObj', {
         	project_id: Session.get("project_id") || "",
         	priority: "major",
-        	importance: "normal"
+        	importance: "normal",
+        	spent: 0
         });
         Session.set('page_name', 'NewIssue');
 	}
@@ -111,8 +117,8 @@ Template.PomodoroTimer.events({
 	},
 });
 
-//var period = 20 * 60 * 1000;
-var period = 5 * 1000;
+var period = 20 * 60 * 1000;
+//var period = 5 * 1000;
 var timeLeft = period;
 var endTime = null;
 var timer = null; 
@@ -152,5 +158,7 @@ function completed() {
     Tickets.update({_id:id}, {$inc: {spent: 20}}, function(err) {
     	err ? consoleloge("Updating task "+id+" failed: "+err) : consolelog("Updating task "+id+" for 20m"); 
     });
-//	Session.set("playSound", true);
+    // Trick to play sound only once
+	Session.set("playSound", new Date());
+	setInterval(function(){Session.set("playSound", false);},3000);
 }

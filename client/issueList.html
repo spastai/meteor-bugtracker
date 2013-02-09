@@ -37,9 +37,7 @@
 		   				<button class="btn hide-done active">Hide done issues</button>
 		   			</div>
 					{{/constant}}
-			   		{{#if session "playSound"}}
-			   			{{> playStop}}
-			   		{{/if}}
+		   			{{> playStop}}
 		   		</form>
 			</div>
 			
@@ -120,12 +118,12 @@
 
 
 <template name="playStop">
-	{{#constant}}
-	<embed type="application/x-shockwave-flash" 
+	{{#if session "playSound"}}
+	<embed id="{{session "playSound"}}" type="application/x-shockwave-flash" 
 		flashvars="audioUrl=crank-1.mp3&autoPlay=true" 
-		src="http://www.google.com/reader/ui/3523697345-audio-player.swf"  
+		src="http://www.google.com/reader/ui/3523697345-audio-player.swf"
 		width="0" 
 		height="0" 
 		quality="best"></embed>
-	{{/constant}}
+	{{/if}}  
 </template>

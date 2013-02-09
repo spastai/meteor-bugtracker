@@ -17,7 +17,9 @@ forms.model("issueForm", issueForm, {
 		var values = forms.getValues("issueForm",template);
 		// this indicates it is new object
 		values.owner_id = Meteor.userId();
-		// logdir("Issue values:",values);
+		// do spent conversation
+		values.spent = Number(values.spent);
+		
 		if(Session.get("issueObj")._id) {
 			values["_id"] = Session.get("issueObj")._id;
 			Tickets.update({_id:values._id}, values);
