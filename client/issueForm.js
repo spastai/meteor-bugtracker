@@ -6,6 +6,7 @@ var issueForm = {
 		project_id: {type: "select", label: "Issue title", options: projects},
 		description: {type: "textarea", label: "Description", placeholder: "Describe..."},
 		estimated: {type: String, label: "Estimated time", placeholder: "Enter..."},
+		acceptance: {type: "textarea", label: "Done criteria", placeholder: "Describe..."},
 		type: {type: "select", label: "Type", options: types},
 		spent: {type: String, label: "Spent time", placeholder: "Enter..."},
 		priority: {type: "select", label: "Urgency", options: priorities},
