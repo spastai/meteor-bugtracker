@@ -84,6 +84,7 @@ Template.TicketListPage.events({
         	project_id: Session.get("project_id") || "",
         	priority: "major",
         	importance: "normal",
+        	estimated: 60,
         	spent: 0
         });
         Session.set('page_name', 'NewIssue');
