@@ -55,19 +55,19 @@ function types() {
 
 function priorities() {
 	return [
-	  {value:"blocker", title:"Blocker"},
-	  {value:"critical", title:"Critical"},
-	  {value:"major", title:"Major"},
-	  {value:"minor", title:"Minor"},
-	  {value:"trivial", title:"Trivial"},
+	  {value:"5", title:"Blocker"},
+	  {value:"4", title:"Critical"},
+	  {value:"3", title:"Major"},
+	  {value:"2", title:"Minor"},
+	  {value:"1", title:"Trivial"},
 	];
 } 
 
 function importancies() {
 	return [
-	  {value:"high", title:"High"},
-	  {value:"normal", title:"Normal"},
-	  {value:"low", title:"Low"},
+	  {value:"3", title:"High"},
+	  {value:"2", title:"Normal"},
+	  {value:"1", title:"Low"},
 	];
 
 } 
