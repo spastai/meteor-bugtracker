@@ -82,8 +82,8 @@ Template.TicketListPage.events({
 	'click .new-issue': function (event, template) {
         Session.set('issueObj', {
         	project_id: Session.get("project_id") || "",
-        	priority: "major",
-        	importance: "normal",
+        	priority: 3,
+        	importance: 2,
         	estimated: 60,
         	spent: 0
         });
