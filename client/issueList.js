@@ -42,11 +42,11 @@ Template.TicketListPage.project = function () {
 	return obj ? obj.name : '';
 };
 var priorityMapping = {
-	  blocker:"label-important",
-	  critical:"label-warning",
-	  major:"label-success",
-	  minor:"label-info",
-	  trivial:""
+	  5:"label-important",
+	  4:"label-warning",
+	  3:"label-success",
+	  2:"label-info",
+	  1:""
 };
 Template.TicketListPage.priorityLabel = function () {
 	return priorityMapping[this.priority];
