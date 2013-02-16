@@ -4,13 +4,14 @@
 var issueForm = {
 		title: {type: String, label: "Issue title", placeholder: "Issue title..."},
 		project_id: {type: "select", label: "Issue title", options: projects},
-		description: {type: "textarea", label: "Description", placeholder: "Describe..."},
+		description: {type: "textarea", label: "Description", placeholder: "As a ... I want ... in order ..."},
 		estimated: {type: String, label: "Estimated time", placeholder: "Enter..."},
-		acceptance: {type: "textarea", label: "Done criteria", placeholder: "Describe..."},
+		acceptance: {type: "textarea", label: "Done criteria", placeholder: "List the actions you will perform to check task is completed"},
+		importance: {type: "select", label: "Importance", options: importancies},
+		version: {type: "select", label: "Fix Version", options: versions},
 		type: {type: "select", label: "Type", options: types},
 		spent: {type: String, label: "Spent time", placeholder: "Enter..."},
 		priority: {type: "select", label: "Urgency", options: priorities},
-		importance: {type: "select", label: "Importance", options: importancies},
 };
 
 forms.model("issueForm", issueForm, {
@@ -44,22 +45,26 @@ function projects() {
 	});
 }
 
+function versions() {
+	if(Session.get("issueObj").project_id) {
+//		console.log("Show versions of project:"+Session.get("issueObj").project_id);
+//		console.dir(Projects.findOne(Session.get("issueObj").project_id));
+		var versions = Projects.findOne(Session.get("issueObj").project_id).versions
+		var result = [{value: "", title: ""}];
+		for(i in versions) {
+			result.push({value: versions[i], title: versions[i]});  
+		}
+		return result;
+	} else {
+		return [];
+	}
+}
+
 function types() {
 	return [
 	  {value:"task", title:"Task"},
 	  {value:"story", title:"Story"},
 	  {value:"bug", title:"Bug"},
-	];
-} 
-
-
-function priorities() {
-	return [
-	  {value:"5", title:"Blocker"},
-	  {value:"4", title:"Critical"},
-	  {value:"3", title:"Major"},
-	  {value:"2", title:"Minor"},
-	  {value:"1", title:"Trivial"},
 	];
 } 
 
@@ -69,5 +74,14 @@ function importancies() {
 	  {value:"2", title:"Normal"},
 	  {value:"1", title:"Low"},
 	];
+} 
 
+function priorities() {
+	return [
+	  {value:"5", title:"Blocker"},
+	  {value:"4", title:"Critical"},
+	  {value:"3", title:"Major"},
+	  {value:"2", title:"Minor"},
+	  {value:"1", title:"Trivial"},
+	];
 } 
