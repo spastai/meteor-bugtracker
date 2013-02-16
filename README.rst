@@ -13,4 +13,8 @@ Benefits:
 * Responsive design makes it compatible with mobiles
 * Agile compatible - has estimations, time spent and even Pomodoro timer
 
-.. vim:set ft=rst
+What's new
+==========
+
+0.0.1 
+[+] Projects have versions lists to be assigned to issues 
