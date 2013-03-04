@@ -2,7 +2,7 @@
  * New node file
  */
 Template.ProjectList.projects = function() {
-	return Projects.find();
+	return Projects.find({},{sort:{order:1}});
 }
 
 Template.ProjectList.events({
@@ -14,6 +14,12 @@ Template.ProjectList.events({
         Session.set('projectObj', this);
         Session.set('page_name', 'EditProject');
 	},
+	'click .up': function (event, template) {
+		forms.getCrud("projectForm").up(this._id);
+	},
+	'click .down': function (event, template) {
+		forms.getCrud("projectForm").down(this._id);
+	},	
 	'click .delete': function (event, template) {
 		forms.getCrud("projectForm").remove(this._id);
 	}	

@@ -2,7 +2,7 @@
 
 Template.sidebar_filter.items = function () {
     var session_field = this.session_field;
-    return _.map(this.collection.find().fetch(), function (item) { 
+    return this.collection.find({},{sort:{order:1}}).map(function(item) { 
     	return {item: item, session_field: session_field};
 	});
 };
