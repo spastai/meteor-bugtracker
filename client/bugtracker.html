@@ -28,7 +28,7 @@ You have to login
 
 <template name="Registration">
 	{{#if session "registrationError"}}
-		{{session "registrationError"}}
+		<strong>{{session "registrationError"}}</strong>
 	{{/if}}
 	{{#with formParams "registrationForm" "registrationObj"}}
 		{{> form}}
