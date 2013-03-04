@@ -32,7 +32,7 @@ Template.TicketListPage.tickets = function () {
 //    consoledir("Filtering tickets:",query);
 	var sort = {};
 	sort[(Session.get("sortBy") || "propertyName")] = Session.get("sortOrder") || 0;     
-    
+    sort.priority = -1;
     return Tickets.find(query, {sort: sort});
 };
 Template.TicketListPage.viewing_all_projects = Template.TicketListPage.viewing_all_projects;
