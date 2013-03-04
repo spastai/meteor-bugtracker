@@ -31,5 +31,9 @@ Template.LoginForm.events = {
 			}
 		});	
     },
+    'click .registration': function (event, template) {
+        Session.set('page_name', "Registration");
+    	//v("Registration form:"+Session.get('page_name'));
+    },
     
 }

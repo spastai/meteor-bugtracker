@@ -1,6 +1,9 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<title>TaskTracker</title>
+  	
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+  	
 </head>
 
 <body>
@@ -22,3 +25,12 @@
 <template name="Login">
 You have to login
 </template>
+
+<template name="Registration">
+	{{#if session "registrationError"}}
+		{{session "registrationError"}}
+	{{/if}}
+	{{#with formParams "registrationForm" "registrationObj"}}
+		{{> form}}
+	{{/with}}	
+</template> 

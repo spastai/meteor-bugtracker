@@ -23,18 +23,14 @@ Meteor.startup(function () {
 
 // Main view renderer
 Template.main.page_name_content = function () {
-	if(Meteor.user())  {
-		var action = Session.get("page_name");
-		// console.log("Page name:"+action);
-		if(action && Template[action]) {
-			return Template[action]();
-		} else {
-			// sets default page
-			return Template['TicketListPage']();
-		}
+	var action = Session.get("page_name");
+	//v("Page name:"+action);
+	if(action && Template[action]) {
+		return Template[action]();
 	} else {
+		// sets default page
 		return Template['TicketListPage']();
-	} 
+	}
 };
 Template.main.viewing_ticket = function () {
     return ! Session.equals('ticket_id', null);
