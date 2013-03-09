@@ -75,6 +75,12 @@ Template.TicketListPage.owner = function () {
 		return "";
 	}
 };
+
+Template.TicketListPage.subtask = function() {
+	//v("Returning subtasks for issue:"+this._id);
+	return Tickets.find({parentIssue:this._id});
+}
+
 Template.TicketListPage.rendered = function() {
 }
 
@@ -88,8 +94,8 @@ Template.TicketListPage.events({
         	spent: 0
         });
         Session.set('page_name', 'NewIssue');
-	}
-    , 'click .edit-issue': function () {
+	}, 
+	'click .edit-issue': function () {
     	//console.log("Edit issue");
         Session.set('issueObj', this);
         Session.set('page_name', 'NewIssue');
@@ -97,6 +103,20 @@ Template.TicketListPage.events({
     'click .delete': function () {
     	forms.getCrud("issueForm").remove(this._id);
      },
+     
+	'click .add-subtask': function () {
+    	//v("Edit subtask");
+        Session.set('issueObj', {});
+        Session.set('parentIssue', this);
+        Session.set('page_name', 'NewIssue');
+     },
+	'click .edit-subtask': function (event, template) {
+    	//d("Edit subtask",this);
+        Session.set('issueObj', this);
+        Session.set('parentIssue',{_id: this.parentIssue});
+        Session.set('page_name', 'NewIssue');
+     },
+     
     'click .complete': function (event, template) {
     	//console.log("Crud:"+forms.getCrud("issueForm"));
     	forms.getCrud("issueForm").markComplete(this._id, event.target.checked);
@@ -112,12 +132,19 @@ Template.TicketListPage.events({
 	}     
 });
 
+// Is required as editing subtask has only parentIssue id 
+Template.NewIssue.parentIssue = function() {
+	//v("Parent issue id:"+Session.get('parentIssue')._id);
+	return Tickets.findOne({_id:Session.get('parentIssue')._id});
+}
 Template.NewIssue.events({
 	'click .save': function (event, template) {
         Session.set('page_name', 'TicketListPage');
+        Session.set('parentIssue',undefined);
 	},
 	'click .cancel': function (event, template) {
         Session.set('page_name', 'TicketListPage');
+        Session.set('parentIssue',undefined);
 	}
 });
 

@@ -1,9 +1,18 @@
 <template name="NewIssue">
+	{{#if session "parentIssue"}}
+		{{#if sessionField "issueObj" "_id"}}
+			<h2>Edit subtask for issue: {{parentIssue.title}}</h2>
+		{{else}}		
+			<h2>New subtask for issue: {{parentIssue.title}}</h2>
+		{{/if}}
+						
+	{{else}}		
 		{{#if sessionField "issueObj" "_id"}}
 			<h2>Edit issue:</h2>			
 		{{else}}		
 			<h2>New Issue:</h2>
 		{{/if}}
+	{{/if}}
 	<div class="row-fluid">
 		{{#with formParams "issueForm" "issueObj"}}
 			{{> form}}
@@ -97,8 +106,7 @@
 								{{owner}}
 							</div>
 							<div class="span1 visible-desktop">
-								<button type="button" class="delete btn btn-primary">
-									<i class="icon-remove icon-white"></i>
+								<button type="button" class="delete btn"><i class="icon-remove"></i>
 								</button>				
 							</div>
 						</div>			
@@ -110,13 +118,19 @@
 							<div>
 								Time spent: {{spent}}
 							</div>
-							<button class="btn btn-primary edit-issue">Edit Issue</button>
+							<div>
+								Subtasks:
+								{{#each subtask}} 
+									<a href="#" class="edit-subtask">{{title}}</a>
+								{{/each}}
+							</div>
+							<button class="btn edit-issue">Edit Issue</button>
+							<button class="btn add-subtask">Add subtask</button>
 						</div>
 					</div>
 				</div>
 				{{/each}}
-			</div>
-				
+			</div>				
 		</div>
 		<div class="span3">
 		  <div class="well">

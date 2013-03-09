@@ -21,14 +21,17 @@ forms.model("issueForm", issueForm, {
 		values.owner_id = Meteor.userId();
 		// do spent conversation
 		values.spent = Number(values.spent);
-		
+
+		//v("If this is subtask, take parent issue from session");		
+		if(Session.get("parentIssue")) {
+			values.parentIssue = Session.get("parentIssue")._id; 
+		} 
 		if(Session.get("issueObj")._id) {
 			values["_id"] = Session.get("issueObj")._id;
 			Tickets.update({_id:values._id}, values);
 		} else {
 			Tickets.insert(values);
 		}
-		
 	},
 	remove: function(id) {
 		Tickets.remove({_id:id});
