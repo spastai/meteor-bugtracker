@@ -14,7 +14,9 @@ Template.TicketListPage.sortTitle = function(title,id) {
 	return '<a href="#" class="sort" id="sort-'+id+'">'+title+sortIcon+'</i></a>';
 };
 Template.TicketListPage.tickets = function () {
-    var query = {};
+    var query = {
+    	parentIssue: { $exists: false }
+    };
     var add_filter = function (field) {
         var value = Session.get(field);
         if (value) {
@@ -73,7 +75,6 @@ function sum(collection,query ,field) {
 		sum += item.field;
 	});
 }
-
 
 Template.TicketListPage.owner = function () {
 	if(this.owner_id) {
