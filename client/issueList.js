@@ -69,7 +69,6 @@ Template.TicketListPage.overduePomodoro = function() {
 }
 function sum(collection,query ,field) {
 	var sum = 0;
-	boolean 
 	collection.find().forEach(function(item) {
 		sum += item.field;
 	});
@@ -89,7 +88,6 @@ Template.TicketListPage.subtask = function() {
 	//v("Returning subtasks for issue:"+this._id);
 	return Tickets.find({parentIssue:this._id});
 }
-
 
 Template.TicketListPage.rendered = function() {
 }
@@ -116,11 +114,10 @@ Template.TicketListPage.events({
      
 	'click .add-subtask': function () {
     	//v("Edit subtask");
+		//v("Copy spent and estimated from parent issue to first new subtask");
         Session.set('issueObj', {
-			//v("Copy spent and estimated from parent issue to first new subtask");
-			estimated = this.estimated; 
-			spent = this.spent; 
-        	
+			estimated = this.estimated,
+			spent = this.spent        	
         });
         Session.set('parentIssue', this);
         Session.set('page_name', 'NewIssue');
