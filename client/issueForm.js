@@ -22,9 +22,10 @@ forms.model("issueForm", issueForm, {
 		// do spent conversation
 		values.spent = Number(values.spent);
 
-		//v("If this is subtask, take parent issue from session");		
-		if(Session.get("parentIssue")) {
-			values.parentIssue = Session.get("parentIssue")._id; 
+		//v("If this is subtask, take parent issue from session");
+		var parentIssue = Session.get("parentIssue");		
+		if(parentIssue) {
+			values.parentIssue = parentIssue._id; 
 		} 
 		if(Session.get("issueObj")._id) {
 			values["_id"] = Session.get("issueObj")._id;

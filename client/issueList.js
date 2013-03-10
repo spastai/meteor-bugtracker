@@ -62,10 +62,19 @@ Template.TicketListPage.plannedPomodoro = function() {
 	return s < e ? e-s : 0;
 }
 Template.TicketListPage.overduePomodoro = function() {
+	//sum(Tickets, {parentIssue:this._id}, 
 	var e = this.estimated / pomodoroLength;
 	var s = this.spent / pomodoroLength;
 	return s > e ? s-e : 0;
 }
+function sum(collection,query ,field) {
+	var sum = 0;
+	boolean 
+	collection.find().forEach(function(item) {
+		sum += item.field;
+	});
+}
+
 
 Template.TicketListPage.owner = function () {
 	if(this.owner_id) {
@@ -80,6 +89,7 @@ Template.TicketListPage.subtask = function() {
 	//v("Returning subtasks for issue:"+this._id);
 	return Tickets.find({parentIssue:this._id});
 }
+
 
 Template.TicketListPage.rendered = function() {
 }
@@ -106,7 +116,12 @@ Template.TicketListPage.events({
      
 	'click .add-subtask': function () {
     	//v("Edit subtask");
-        Session.set('issueObj', {});
+        Session.set('issueObj', {
+			//v("Copy spent and estimated from parent issue to first new subtask");
+			estimated = this.estimated; 
+			spent = this.spent; 
+        	
+        });
         Session.set('parentIssue', this);
         Session.set('page_name', 'NewIssue');
      },
