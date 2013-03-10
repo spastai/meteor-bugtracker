@@ -116,8 +116,8 @@ Template.TicketListPage.events({
     	//v("Edit subtask");
 		//v("Copy spent and estimated from parent issue to first new subtask");
         Session.set('issueObj', {
-			estimated = this.estimated,
-			spent = this.spent        	
+			estimated: this.estimated,
+			spent: this.spent        	
         });
         Session.set('parentIssue', this);
         Session.set('page_name', 'NewIssue');
