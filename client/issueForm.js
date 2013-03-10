@@ -21,6 +21,7 @@ forms.model("issueForm", issueForm, {
 		values.owner_id = Meteor.userId();
 		// do spent conversation
 		values.spent = Number(values.spent);
+		values.estimated = Number(values.estimated);
 
 		//v("If this is subtask, take parent issue from session");
 		var parentIssue = Session.get("parentIssue");		

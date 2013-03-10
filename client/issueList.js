@@ -54,28 +54,51 @@ Template.TicketListPage.priorityLabel = function () {
 	return priorityMapping[this.priority];
 }
 Template.TicketListPage.completedPomodoro = function() {
-	var e = (this.estimated) / pomodoroLength;
-	var s = this.spent / pomodoroLength;
+	var estimated = sumIfFound(Tickets, {parentIssue: this._id}, "estimated");
+	estimated = estimated != undefined ? estimated : this.estimated;
+	var spent = sumIfFound(Tickets, {parentIssue: this._id}, "spent");
+	spent = spent != undefined  ? spent : this.spent;
+	
+	var e = (estimated) / pomodoroLength;
+	var s = spent / pomodoroLength;
 	return  s < e ? s : e;
 }
 Template.TicketListPage.plannedPomodoro = function() {
-	var e = this.estimated / pomodoroLength;
-	var s = this.spent / pomodoroLength;
+	var estimated = sumIfFound(Tickets, {parentIssue: this._id}, "estimated");
+	estimated = estimated != undefined ? estimated : this.estimated;
+	var spent = sumIfFound(Tickets, {parentIssue: this._id}, "spent");
+	spent = spent != undefined  ? spent : this.spent;
+
+	var e = estimated / pomodoroLength;
+	var s = spent / pomodoroLength;
 	return s < e ? e-s : 0;
 }
 Template.TicketListPage.overduePomodoro = function() {
+	var estimated = sumIfFound(Tickets, {parentIssue: this._id}, "estimated");
+	estimated = estimated != undefined ? estimated : this.estimated;
+	var spent = sumIfFound(Tickets, {parentIssue: this._id}, "spent");
+	spent = spent != undefined ? spent : this.spent;
+
 	//sum(Tickets, {parentIssue:this._id}, 
-	var e = this.estimated / pomodoroLength;
-	var s = this.spent / pomodoroLength;
+	var e = estimated / pomodoroLength;
+	var s = spent / pomodoroLength;
 	return s > e ? s-e : 0;
 }
-function sum(collection,query ,field) {
+function sumIfFound(collection,query ,field) {
 	var sum = 0;
-	collection.find().forEach(function(item) {
-		sum += item.field;
+	var found = false;
+	collection.find(query).forEach(function(item) {
+		sum += item[field];
+		found = true;
 	});
+	if(found) {
+		d("Query sum:"+sum,query);
+		return sum;
+	} else {
+		d("Query has no children:",query);
+		return undefined;
+	}
 }
-
 Template.TicketListPage.owner = function () {
 	if(this.owner_id) {
 		var user = Meteor.users.findOne(this.owner_id);
