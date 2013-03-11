@@ -55,7 +55,7 @@ Template.TicketListPage.priorityLabel = function () {
 }
 Template.TicketListPage.hasChildren = function() {
 	// This returns unndefined if no child found
-	return v(sumIfFound(Tickets, {parentIssue: this._id}, "spent"));
+	return sumIfFound(Tickets, {parentIssue: this._id}, "spent");
 }
 
 Template.TicketListPage.completedPomodoro = function() {
@@ -97,10 +97,10 @@ function sumIfFound(collection,query ,field) {
 		found = true;
 	});
 	if(found) {
-		//d("Query sum:"+sum,query);
+		d("Query sum:"+sum,query);
 		return sum;
 	} else {
-		//d("Query has no children:",query);
+		d("Query has no children:",query);
 		return undefined;
 	}
 }
