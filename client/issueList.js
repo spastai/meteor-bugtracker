@@ -53,6 +53,11 @@ var priorityMapping = {
 Template.TicketListPage.priorityLabel = function () {
 	return priorityMapping[this.priority];
 }
+Template.TicketListPage.hasChildren = function() {
+	// This returns unndefined if no child found
+	return v(sumIfFound(Tickets, {parentIssue: this._id}, "spent"));
+}
+
 Template.TicketListPage.completedPomodoro = function() {
 	var estimated = sumIfFound(Tickets, {parentIssue: this._id}, "estimated");
 	estimated = estimated != undefined ? estimated : this.estimated;
@@ -92,10 +97,10 @@ function sumIfFound(collection,query ,field) {
 		found = true;
 	});
 	if(found) {
-		d("Query sum:"+sum,query);
+		//d("Query sum:"+sum,query);
 		return sum;
 	} else {
-		d("Query has no children:",query);
+		//d("Query has no children:",query);
 		return undefined;
 	}
 }

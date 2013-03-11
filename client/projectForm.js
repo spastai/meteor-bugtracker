@@ -5,6 +5,7 @@ var projectForm = {
 		name: {type: String, label: "Project title", placeholder: "Project title..."},
 		public: {type: "checkbox", label: "Public", placeholder: "Enter..."},
 		versions: {type: "listedit", label: "Version", placeholder: "Enter..."},
+		memebers: {type: "listedit", label: "Members", placeholder: "Email..."},
 		order: {type: String, label: "Order", placeholder: "Enter..."},
 };
 

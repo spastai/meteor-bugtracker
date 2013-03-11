@@ -12,6 +12,7 @@ var issueForm = {
 		type: {type: "select", label: "Type", options: types},
 		spent: {type: String, label: "Spent time", placeholder: "Enter..."},
 		priority: {type: "select", label: "Urgency", options: priorities},
+		completed: {type: "checkbox", label: "Completed"},
 };
 
 forms.model("issueForm", issueForm, {
@@ -39,7 +40,7 @@ forms.model("issueForm", issueForm, {
 		Tickets.remove({_id:id});
 	},
 	markComplete: function(id,status) {
-		console.log("Mark completed:"+id+" status:"+status);
+		//v("Mark completed:"+id+" status:"+status);
 		Tickets.update({_id:id},{$set:{complete:status}});
 	}
 });

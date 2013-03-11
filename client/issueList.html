@@ -113,7 +113,9 @@
 					</div>
 					<div id="{{_id}}" class="accordion-body collapse out">
 						<div class="accordion-inner">
-							{{> PomodoroTimer}}
+							{{#unless hasChildren}} 
+								{{> PomodoroTimer}}
+							{{/unless}}
 							<pre>{{description}}</pre>
 							<div>
 								Time spent: {{spent}}
