@@ -144,10 +144,18 @@ Template.TicketListPage.events({
 	'click .add-subtask': function () {
     	//v("Edit subtask");
 		//v("Copy spent and estimated from parent issue to first new subtask");
-        Session.set('issueObj', {
-			estimated: this.estimated,
-			spent: this.spent        	
-        });
+		var issueObj = {
+			estimated: 20,
+			spent: 0        	
+		};
+		if(!sumIfFound(Tickets, {parentIssue: this._id}, "spent")) {
+			issueObj = {
+				estimated: this.estimated,
+				spent: this.spent        	
+        	}
+		} 
+		
+        Session.set('issueObj', issueObj);
         Session.set('parentIssue', this);
         Session.set('page_name', 'NewIssue');
      },

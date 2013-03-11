@@ -20,20 +20,6 @@
 	</div>
 </template>
 
-<template name="PomodoroTimer">
-	<div class="row-fluid">
-		<div class="span2" >
-			<a class="btn btn-small start" href="#">
-				<i class="icon-play"></i> Start</a>		
-		</div>
-		<div class="span10" >
-		    <div class="progress">
-	   			<div class="bar" style="width: 0%;"></div>
-	   		</div>
-   		</div>
-	</div>
-</template>
-
 
 <template name="TicketListPage">
 	<div class="row-fluid">
@@ -113,6 +99,8 @@
 					</div>
 					<div id="{{_id}}" class="accordion-body collapse out">
 						<div class="accordion-inner">
+							<button class="btn edit-issue">Edit Issue</button>
+							<button class="btn add-subtask">Add subtask</button>
 							{{#unless hasChildren}} 
 								{{> PomodoroTimer}}
 							{{/unless}}
@@ -122,12 +110,22 @@
 							</div>
 							<div>
 								Subtasks:
-								{{#each subtask}} 
-									<a href="#" class="edit-subtask">{{title}}</a>
+								{{#each subtask}}
+									<div>
+										<a href="#" class="edit-subtask">{{title}}</a>
+										{{#for completedPomodoro}}
+											<font color="green">X</font> 
+										{{/for}}
+										{{#for plannedPomodoro}}
+											<font color="grey">X</font> 
+										{{/for}}
+										{{#for overduePomodoro}}
+											<font color="red">X</font> 
+										{{/for}}
+										{{> PomodoroTimer}}
+									</div>
 								{{/each}}
 							</div>
-							<button class="btn edit-issue">Edit Issue</button>
-							<button class="btn add-subtask">Add subtask</button>
 						</div>
 					</div>
 				</div>
@@ -142,6 +140,14 @@
 	</div>
 </template>
 
+<template name="PomodoroTimer">
+		<span>
+			<a class="btn btn-small start" href="#"><i class="icon-play"></i> Start</a>
+		</span>		
+	    <div class="progress">
+   			<div class="bar" style="width: 0%;"></div>
+   		</div>
+</template>
 
 <template name="playStop">
 	{{#if session "playSound"}}
