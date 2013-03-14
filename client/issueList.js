@@ -27,12 +27,19 @@ Template.TicketListPage.tickets = function () {
     add_filter('project_id');
     add_filter('owner_id');
     
+    // add property filters
+    var propertyFilter = Session.get("propertyFilter");
+    if(propertyFilter) {
+		for (var attrname in propertyFilter) { 
+			query[attrname] = propertyFilter[attrname]; }    	
+    }
+    
     if(Session.get("filterHideCompleted")) {
     	query["$or"] = [
     		{complete: {$exists: false}},
     		{complete: false}]; 
     }
-//    consoledir("Filtering tickets:",query);
+	//d("Filtering tickets:",query);
 	var sort = {};
 	sort[(Session.get("sortBy") || "propertyName")] = Session.get("sortOrder") || 0;     
     sort.priority = -1;

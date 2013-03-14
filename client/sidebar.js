@@ -32,8 +32,9 @@ Template.sidebar_filter.filterPropertyValues = function(options) {
 	if(filterPropertyValue) {
 		// _id should be configurable
 		query["_id"] = filterPropertyValue;  
+		// versions is a property of projects but version is a property of ticket 
 		result = options.collection.findOne(query,{}).versions;
-		d("Versions found",result);
+		//d("Versions found",result);
 	}
 	return result;
 }
@@ -41,5 +42,16 @@ Template.sidebar_filter.events = {
     'click .choose_all': function () {
         Session.set(this.session_field, null);
         Session.set('ticket_id', null);
+    }, 
+    'click #filter-by-property': function (event, template) {
+    	var selected = $(event.currentTarget).val();
+    	//v("Filter by property:"+this+"="+selected);
+    	var filter = Session.get("propertyFilter") || {};
+    	if(selected == "") {
+	    	delete filter[this];
+	    } else {
+	    	filter[this] = selected;
+	    } 
+    	Session.set("propertyFilter", filter);
     }
 };
