@@ -14,6 +14,7 @@ Template.TicketListPage.sortTitle = function(title,id) {
 	return '<a href="#" class="sort" id="sort-'+id+'">'+title+sortIcon+'</i></a>';
 };
 Template.TicketListPage.tickets = function () {
+	// select all parent issues
     var query = {
     	parentIssue: { $exists: false }
     };
@@ -97,10 +98,10 @@ function sumIfFound(collection,query ,field) {
 		found = true;
 	});
 	if(found) {
-		d("Query sum:"+sum,query);
+		//d("Query sum:"+sum,query);
 		return sum;
 	} else {
-		d("Query has no children:",query);
+		//d("Query has no children:",query);
 		return undefined;
 	}
 }
