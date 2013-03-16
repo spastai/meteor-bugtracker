@@ -112,7 +112,7 @@
 								Subtasks:
 								{{#each subtask}}
 									<div>
-										<a href="#" class="edit-subtask">{{title}}</a>
+										<a href="#" class="edit-subtask{{#if complete}} completed{{/if}}">{{title}}</a>
 										{{#for completedPomodoro}}
 											<font color="green">X</font> 
 										{{/for}}

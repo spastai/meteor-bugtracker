@@ -12,13 +12,13 @@ var issueForm = {
 		type: {type: "select", label: "Type", options: types},
 		spent: {type: String, label: "Spent time", placeholder: "Enter..."},
 		priority: {type: "select", label: "Urgency", options: priorities},
-		completed: {type: "checkbox", label: "Completed"},
+		complete: {type: "checkbox", label: "Completed"},
 };
 
 forms.model("issueForm", issueForm, {
 	create: function(template) {
 		var values = forms.getValues("issueForm",template);
-		//d("Form values:",values);
+		d("Form values:",values);
 		values.owner_id = Meteor.userId();
 		// do spent conversation
 		values.spent = Number(values.spent);

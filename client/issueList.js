@@ -161,8 +161,7 @@ Template.TicketListPage.events({
 				estimated: this.estimated,
 				spent: this.spent        	
         	}
-		} 
-		
+		} 		
         Session.set('issueObj', issueObj);
         Session.set('parentIssue', this);
         Session.set('page_name', 'NewIssue');
