@@ -18,7 +18,7 @@ var issueForm = {
 forms.model("issueForm", issueForm, {
 	create: function(template) {
 		var values = forms.getValues("issueForm",template);
-		// this indicates it is new object
+		//d("Form values:",values);
 		values.owner_id = Meteor.userId();
 		// do spent conversation
 		values.spent = Number(values.spent);
@@ -29,6 +29,7 @@ forms.model("issueForm", issueForm, {
 		if(parentIssue) {
 			values.parentIssue = parentIssue._id; 
 		} 
+		// this indicates it is new object
 		if(Session.get("issueObj")._id) {
 			values["_id"] = Session.get("issueObj")._id;
 			Tickets.update({_id:values._id}, values);
