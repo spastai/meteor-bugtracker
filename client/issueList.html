@@ -66,11 +66,11 @@
 							<div class="span1 visible-desktop">
 								<input class="complete" type="checkbox" {{checked complete}}>
 							</div>
-							<div class="span1 visible-desktop" style="color: black">
+							<div class="span1 visible-desktop accordion-toggle" style="color: black">
 								<span class="label {{priorityLabel}}">{{importance}}</span>
 							</div>
 							{{# if viewing_all_projects }}
-							<div class="span1 visible-desktop" style="color: black">
+							<div class="span1 visible-desktop accordion-toggle" style="color: black">
 									{{ project }}
 							</div>
 							{{/if}}
@@ -78,17 +78,17 @@
 								<a class="accordion-toggle {{#if complete}}completed{{/if}}"  data-toggle="collapse"
 									data-parent="#accordion2" href="#{{_id}}">{{ title }}
 									{{#for completedPomodoro}}
-										<span class="badge badge-success"><i class="icon-play-circle icon-white"></i></span>
+										<span class="label label-success">&nbsp;</span>
 									{{/for}}
 									{{#for plannedPomodoro}}
-										<span class="badge"><i class="icon-play-circle icon-white"></i></span>
+										<span class="label">&nbsp;</span>
 									{{/for}}
 									{{#for overduePomodoro}}
-										<span class="badge badge-important"><i class="icon-play-circle icon-white"></i></span>
+										<span class="label label-important">&nbsp;</span>
 									{{/for}}
 								</a>
 							</div>
-							<div class="span2 visible-desktop" style="color: black">
+							<div class="span2 visible-desktop accordion-toggle" style="color: black">
 								{{owner}}
 							</div>
 							<div class="span1 visible-desktop">
