@@ -27,7 +27,6 @@
 					</button>
 				</td>
 			</tr>
-			
 			{{/each}}
 		</tbody>
 </template>
@@ -41,4 +40,14 @@
 	{{#with formParams "projectForm" "projectObj"}}
 		{{> form}}
 	{{/with}}
+</template>
+
+<template name="InformMembers">
+	{{#each members}}
+		<div>
+			{{#if username}} {{username}} was added to the project {{/if}}
+			{{#if email}} Invitation to join the project was sent to {{email}} - {{id}} {{/if}}
+		</div>
+	{{/each}}
+	<button type="button" class="btn done">Done</button>
 </template>

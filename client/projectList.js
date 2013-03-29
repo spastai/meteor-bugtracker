@@ -28,19 +28,40 @@ Template.ProjectList.events({
 
 Template.EditProject.events({
 	'click .save': function (event, template) {
-        Session.set('page_name', 'ProjectList');
+		var members = Session.get("newMembers");
+		v("New members:"+members);
+		if(members && members.length > 0) {
+			for(m in members) {
+				Invitations.insert({email: members[m]}); 
+			}
+        	Session.set('page_name', 'InformMembers');
+		} else {
+        	Session.set('page_name', 'ProjectList');
+        }
 	},
 	'click .cancel': function (event, template) {
         Session.set('page_name', 'ProjectList');
-	},
-	'click .saveVersion': function (event, template) {
-		var version = $(template.find('#version')).val();
-		console.log("Save version:"+version);
-		var project = Session.get('projectObj');
-		if(!project.versions) {
-			project.versions = [];
+	}
+});
+
+Template.InformMembers.members = function() {
+	var users = [];
+	var members = Session.get("newMembers");	
+	for(m in members) {
+		var user = Meteor.users.findOne({"emails.address": members[m]});
+		if(user) {
+			//v("User found:"+user);
+			users.push({username: members[m]});
+		} else {
+			var invitation = Invitations.findOne({email: members[m]});
+			users.push({email: members[m], id: invitation._id});
 		}
-		project.versions.push(version);
-		Session.set('projectObj', project);
+	}
+	return users;
+};
+
+Template.InformMembers.events({
+	'click .done': function (event, template) {
+       	Session.set('page_name', 'ProjectList');
 	}
 });

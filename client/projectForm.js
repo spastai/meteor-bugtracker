@@ -1,15 +1,13 @@
 /**
  * New node file
  */
-var projectForm = {
+forms.model("projectForm", {
 		name: {type: String, label: "Project title", placeholder: "Project title..."},
 		public: {type: "checkbox", label: "Public", placeholder: "Enter..."},
 		versions: {type: "listedit", label: "Version", placeholder: "Enter..."},
-		memebers: {type: "listedit", label: "Members", placeholder: "Email..."},
+		members: {type: "listedit", label: "Members", placeholder: "Email..."},
 		order: {type: String, label: "Order", placeholder: "Enter..."},
-};
-
-forms.model("projectForm", projectForm, {
+	},  {
 	create: function(template) {
 		var values = forms.getValues("projectForm",template);
 		logdir("Project values:",values);
@@ -18,11 +16,18 @@ forms.model("projectForm", projectForm, {
 		// TODO create field type number
 		values.order = Number(values.order);
 	
-		var id = Session.get("projectObj")._id; 	
+		var id = Session.get("projectObj")._id;
 		if(id) {
+			//v("Calculate delta");
+			var project = Projects.findOne({_id:id});		 	
+			//d("Existing members",project.members);
+			Session.set("newMembers",_.difference(values.members,project.members));
+			//d("Inform new members",_.difference(values.members,project.members));  
 			Projects.update({_id:id}, values);
 		} else {
 			Projects.insert(values);
+			Session.set("New members:"+values.members);
+			d("Inform new members",values.members);  
 		}
 	},
 	
