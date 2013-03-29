@@ -138,12 +138,12 @@ Template.TicketListPage.events({
         	estimated: 60,
         	spent: 0
         });
-        Session.set('page_name', 'NewIssue');
+        Session.set('pageView', 'NewIssue');
 	}, 
 	'click .edit-issue': function () {
     	//console.log("Edit issue");
         Session.set('issueObj', this);
-        Session.set('page_name', 'NewIssue');
+        Session.set('pageView', 'NewIssue');
      },
     'click .delete': function () {
     	forms.getCrud("issueForm").remove(this._id);
@@ -164,13 +164,13 @@ Template.TicketListPage.events({
 		} 		
         Session.set('issueObj', issueObj);
         Session.set('parentIssue', this);
-        Session.set('page_name', 'NewIssue');
+        Session.set('pageView', 'NewIssue');
      },
 	'click .edit-subtask': function (event, template) {
     	//d("Edit subtask",this);
         Session.set('issueObj', this);
         Session.set('parentIssue',{_id: this.parentIssue});
-        Session.set('page_name', 'NewIssue');
+        Session.set('pageView', 'NewIssue');
      },
      
     'click .complete': function (event, template) {
@@ -195,11 +195,11 @@ Template.NewIssue.parentIssue = function() {
 }
 Template.NewIssue.events({
 	'click .save': function (event, template) {
-        Session.set('page_name', 'TicketListPage');
+        Session.set('pageView', 'TicketListPage');
         Session.set('parentIssue',undefined);
 	},
 	'click .cancel': function (event, template) {
-        Session.set('page_name', 'TicketListPage');
+        Session.set('pageView', 'TicketListPage');
         Session.set('parentIssue',undefined);
 	}
 });

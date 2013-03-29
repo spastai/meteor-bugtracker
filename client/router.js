@@ -33,7 +33,7 @@ Meteor.startup(function() {
 
 
 Handlebars.registerHelper('pageContent', function(){
-	var action = Session.get("pageView") || "Main";
+	var action = Session.get("pageView") || "TicketListPage";
 	//v("Page name:"+action);
 	return Template[action]();
 });

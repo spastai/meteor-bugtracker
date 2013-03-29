@@ -15,7 +15,7 @@ forms.model("registrationForm", registrationForm, {
 				consoledir("Registration error:",error);
 				Session.set("registrationError", error.reason);
 			} else {
-				Session.set('page_name', "TicketListPage");				
+				Session.set('pageView', "TicketListPage");				
 				Session.set("registrationError", undefined);
 			}
 		});

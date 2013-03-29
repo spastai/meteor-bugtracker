@@ -21,17 +21,6 @@ Session.set("filterHideCompleted",true);
 Meteor.startup(function () {
 });
 
-// Main view renderer
-Template.main.page_name_content = function () {
-	var action = Session.get("page_name");
-	//v("Page name:"+action);
-	if(action && Template[action]) {
-		return Template[action]();
-	} else {
-		// sets default page
-		return Template['TicketListPage']();
-	}
-};
 Template.main.viewing_ticket = function () {
     return ! Session.equals('ticket_id', null);
 };

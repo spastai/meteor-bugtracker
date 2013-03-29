@@ -8,11 +8,11 @@ Template.ProjectList.projects = function() {
 Template.ProjectList.events({
 	'click .new-project': function (event, template) {
         Session.set('projectObj', {});
-        Session.set('page_name', 'EditProject');
+        Session.set('pageView', 'EditProject');
 	},
 	'click .edit-project': function (event, template) {
         Session.set('projectObj', this);
-        Session.set('page_name', 'EditProject');
+        Session.set('pageView', 'EditProject');
 	},
 	'click .up': function (event, template) {
 		forms.getCrud("projectForm").up(this._id);
@@ -34,13 +34,13 @@ Template.EditProject.events({
 			for(m in members) {
 				Invitations.insert({email: members[m]}); 
 			}
-        	Session.set('page_name', 'InformMembers');
+        	Session.set('pageView', 'InformMembers');
 		} else {
-        	Session.set('page_name', 'ProjectList');
+        	Session.set('pageView', 'ProjectList');
         }
 	},
 	'click .cancel': function (event, template) {
-        Session.set('page_name', 'ProjectList');
+        Session.set('pageView', 'ProjectList');
 	}
 });
 
@@ -62,6 +62,6 @@ Template.InformMembers.members = function() {
 
 Template.InformMembers.events({
 	'click .done': function (event, template) {
-       	Session.set('page_name', 'ProjectList');
+       	Session.set('pageView', 'ProjectList');
 	}
 });
