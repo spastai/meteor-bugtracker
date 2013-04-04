@@ -17,6 +17,14 @@ Template.navbar.events = {
 		});	
 	}       
 };
+Template.navbar.username = function() {
+	var user = Meteor.user();
+	if(user.profile) {
+		return user.profile.name;
+	} else if(user.emails) {
+		return user.emails[0].address;
+	}
+};
 Template.nav_link.is_active = function () {
     return Session.equals('pageView', this.pageView) ? 'active' : '';
 }

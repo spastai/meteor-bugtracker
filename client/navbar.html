@@ -27,7 +27,7 @@
 				<div class="pull-right navbar-text">
 					
 					<div class="btn-group">
-						<button type="button" class="btn login">{{currentUser.emails.0.address}}</button>
+						<button type="button" class="btn login">{{username}}</button>
 						<button class="btn dropdown-toggle" data-toggle="dropdown">
 							<span class="caret"></span>
 						</button>
@@ -37,7 +37,6 @@
 					</div>									
 				</div>
 			{{else}}
-				{{loginButtons}}
 			   	<form class="navbar-form pull-right">
 		   			<button type="button" class="btn loginWithGoogle"><img src="google.png" /></button>
 		   			or
