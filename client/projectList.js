@@ -1,5 +1,5 @@
 /**
- * New node file
+ * Project list
  */
 Template.ProjectList.projects = function() {
 	return Projects.find({},{sort:{order:1}});
@@ -29,10 +29,10 @@ Template.ProjectList.events({
 Template.EditProject.events({
 	'click .save': function (event, template) {
 		var members = Session.get("newMembers");
-		v("New members:"+members);
 		if(members && members.length > 0) {
 			for(m in members) {
 				Invitations.insert({email: members[m]}); 
+				v("Adding new member:"+members[m]);
 			}
         	Session.set('pageView', 'InformMembers');
 		} else {
@@ -50,11 +50,13 @@ Template.InformMembers.members = function() {
 	for(m in members) {
 		var user = Meteor.users.findOne({"emails.address": members[m]});
 		if(user) {
-			//v("User found:"+user);
+			v("User found:"+user);
 			users.push({username: members[m]});
 		} else {
+			v("New user:"+members[m]);
 			var invitation = Invitations.findOne({email: members[m]});
-			users.push({email: members[m], id: invitation._id});
+			var url = invitation ? Meteor.absoluteUrl("/register/"+invitation._id) : "";
+			users.push({email: members[m], url: url});
 		}
 	}
 	return users;

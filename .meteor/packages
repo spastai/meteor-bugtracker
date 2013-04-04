@@ -9,3 +9,5 @@ bootstrap
 less
 accounts-ui
 accounts-password
+backbone
+accounts-google

@@ -14,3 +14,7 @@ Meteor.publish("issues", function(begin, end, pageSize, currentPage, sort) {
             {owner_id: this.userId}
         ]});
 });
+
+Meteor.publish("invitations", function() {
+	return Invitations.find({});
+});

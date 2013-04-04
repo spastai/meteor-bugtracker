@@ -25,12 +25,4 @@
 <template name="Login">
 You have to login
 </template>
-
-<template name="Registration">
-	{{#if session "registrationError"}}
-		<strong>{{session "registrationError"}}</strong>
-	{{/if}}
-	{{#with formParams "registrationForm" "registrationObj"}}
-		{{> form}}
-	{{/with}}	
-</template> 
+ 

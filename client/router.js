@@ -12,7 +12,13 @@ var CustomRouter = Backbone.Router.extend({
   	start: function() {
   	},
   	register: function(id) {
-  		
+		var inivation = Invitations.findOne({_id: id});
+		if(inivation) {
+			Session.set("registrationObj", {
+				email: inivation.email
+			});
+		}
+		Session.set("pageView","Registration");
   	},
   	test: function(id) {
   		v("Test:"+id);
@@ -30,7 +36,6 @@ Meteor.startup(function() {
 	});
 	//v("Backbone started");
 });
-
 
 Handlebars.registerHelper('pageContent', function(){
 	var action = Session.get("pageView") || "TicketListPage";

@@ -37,7 +37,10 @@
 					</div>									
 				</div>
 			{{else}}
+				{{loginButtons}}
 			   	<form class="navbar-form pull-right">
+		   			<button type="button" class="btn loginWithGoogle"><img src="google.png" /></button>
+		   			or
 			   		{{> LoginForm}}
 			   	</form>
 			{{/if}}	      	
@@ -52,12 +55,6 @@
 		<input type="password" id="password" placeholder="Password" class="span2">
 		<div class="btn-group">
 			<button type="button" class="btn login">Login</button>
-			<button class="btn dropdown-toggle" data-toggle="dropdown">
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu">
-				<li><a href="#" class="registration" >Register</a></li>
-			</ul>
 		</div>				
 </template> 
 

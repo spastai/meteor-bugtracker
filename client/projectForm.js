@@ -1,5 +1,5 @@
 /**
- * New node file
+ * Project form
  */
 forms.model("projectForm", {
 		name: {type: String, label: "Project title", placeholder: "Project title..."},
@@ -51,7 +51,6 @@ forms.model("projectForm", {
 	
 	remove: function(id) {
 		Projects.remove({_id:id});
-	},
-	
+	},	
 });
   

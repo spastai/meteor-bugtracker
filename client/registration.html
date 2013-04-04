@@ -1,0 +1,8 @@
+<template name="Registration">
+	{{#if session "registrationError"}}
+		<strong>{{session "registrationError"}}</strong>
+	{{/if}}
+	{{#with formParams "registrationForm" "registrationObj"}}
+		{{> form}}
+	{{/with}}	
+</template>

@@ -5,7 +5,17 @@ Template.navbar.nav_links = [
 Template.navbar.events = {
     'click .logout': function (event, template) {
     	Meteor.logout();
-    } 	
+    },
+ 	'click .loginWithGoogle': function(event, template) {
+		v("Log in with google");
+		Meteor.loginWithGoogle({requestPermissions:["https://www.googleapis.com/auth/userinfo.email"]}, function(error) {
+			if(error) {
+				d('Log in with google  error: ',error);
+			} else {
+				v("Logged in");
+			}
+		});	
+	}       
 };
 Template.nav_link.is_active = function () {
     return Session.equals('pageView', this.pageView) ? 'active' : '';
